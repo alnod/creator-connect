@@ -10,10 +10,10 @@ import creator3 from "@/assets/creator-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cadence — Book Austin's best corporate DJs & event hosts" },
-      { name: "description", content: "The Austin marketplace for booking corporate DJs and event hosts directly. Verified talent, instant calendars, escrow payments, 7% flat fee. No agencies." },
-      { property: "og:title", content: "Cadence — Austin's corporate event booking platform" },
-      { property: "og:description", content: "Book vetted Austin DJs and emcees for your next company event. Escrow-backed. Agency-free." },
+      { title: "Cadence — Book Nairobi's best corporate DJs & event MCs" },
+      { name: "description", content: "Kenya's marketplace for booking corporate DJs and event MCs directly. Verified talent, live calendars, M-Pesa & card escrow, 7% flat fee. No agencies." },
+      { property: "og:title", content: "Cadence — Nairobi's corporate event booking platform" },
+      { property: "og:description", content: "Book vetted Nairobi DJs and MCs for your next company event. Escrow-backed. Agency-free." },
     ],
   }),
   component: Landing,
@@ -77,7 +77,7 @@ function Hero() {
             className="tag text-muted-foreground mb-8 flex items-center gap-3"
           >
             <span className="w-8 h-px bg-foreground/30" />
-            Austin · Corporate events
+            Nairobi · Corporate events
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -85,7 +85,7 @@ function Hero() {
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
             className="text-display text-[clamp(3rem,9vw,8.5rem)]"
           >
-            Book Austin's best DJs &amp; hosts. <span className="italic text-accent">Without</span> the agency.
+            Book Nairobi's best DJs &amp; MCs. <span className="italic text-accent">Without</span> the agency.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -93,9 +93,9 @@ function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed"
           >
-            Cadence is the marketplace where Austin companies book vetted DJs
-            and event hosts directly — for offsites, holiday parties, product
-            launches, and conferences. Real calendars. Escrow-backed. 7% flat fee.
+            Cadence is the marketplace where Nairobi companies book vetted DJs
+            and MCs directly — for offsites, end-year parties, product launches,
+            and conferences. Live calendars. M-Pesa &amp; card escrow. 7% flat fee.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -108,7 +108,7 @@ function Hero() {
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
             </button>
             <button className="px-6 py-3.5 rounded-full border border-foreground/20 hover:border-foreground transition-colors inline-flex items-center gap-2">
-              I'm a DJ or host
+              I'm a DJ or MC
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
@@ -131,8 +131,8 @@ function Hero() {
             className="absolute -left-6 lg:-left-16 bottom-10 bg-card border border-border p-5 rounded-md shadow-2xl shadow-foreground/10 max-w-[260px]"
           >
             <div className="tag text-accent mb-2">Booked · 2 min ago</div>
-            <div className="text-display text-2xl">DJ Marcus K.</div>
-            <div className="text-sm text-muted-foreground mt-1">Holiday party · Indeed · $3,200</div>
+            <div className="text-display text-2xl">DJ Kymo</div>
+            <div className="text-sm text-muted-foreground mt-1">End-year party · Safaricom · KSh 145,000</div>
             <div className="mt-3 flex items-center gap-1 text-xs text-foreground/70">
               <Stars className="w-3 h-3 fill-accent text-accent" />
               4.98 · 142 corporate events
@@ -145,8 +145,8 @@ function Hero() {
         {[
           ["0%", "Agency commission"],
           ["24hr", "Avg. quote turnaround"],
-          ["180+", "Vetted Austin DJs & hosts"],
-          ["$2.1M", "Booked through escrow"],
+          ["180+", "Vetted Nairobi DJs & MCs"],
+          ["KSh 95M", "Booked through escrow"],
         ].map(([n, l]) => (
           <div key={l}>
             <div className="text-display text-4xl lg:text-5xl">{n}</div>
@@ -159,7 +159,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const words = ["Corporate DJs", "Event Hosts", "Emcees", "Open-format DJs", "Conference MCs", "Holiday parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
+  const words = ["Corporate DJs", "Event MCs", "Emcees", "Afrobeats DJs", "Conference MCs", "End-year parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
   const row = [...words, ...words];
   return (
     <section className="border-y border-border bg-secondary/40 py-6 overflow-hidden">
@@ -177,9 +177,9 @@ function Marquee() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Discover", d: "Browse vetted Austin DJs and hosts filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
+    { n: "01", t: "Discover", d: "Browse vetted Nairobi DJs and MCs filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
     { n: "02", t: "Request", d: "Pick a date from a live calendar. Send your event brief. Get a firm quote within 24 hours — not a week of agency back-and-forth." },
-    { n: "03", t: "Escrow", d: "Funds are held safely by Stripe until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
+    { n: "03", t: "Escrow", d: "Funds are held safely via M-Pesa or card until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
     { n: "04", t: "Review", d: "Both sides rate after the event. Reputation is transparent, earned, and visible — replacing the agency's vetting." },
   ];
   return (
@@ -226,7 +226,7 @@ function Features() {
       <div className="max-w-[1400px] mx-auto">
         <div className="tag text-accent mb-6">§ Built-in trust</div>
         <h2 className="text-display text-5xl lg:text-7xl max-w-3xl">
-          Everything an agency does. <span className="italic text-background/60">Built for Austin's corporate scene.</span>
+          Everything an agency does. <span className="italic text-background/60">Built for Nairobi's corporate scene.</span>
         </h2>
         <div className="mt-20 grid md:grid-cols-2 gap-x-16 gap-y-16">
           {items.map(({ Icon, t, d }, i) => (
@@ -253,19 +253,19 @@ function Features() {
 
 function Creators() {
   const list = [
-    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ · East Austin", rate: "from $1,800", rating: "4.99", events: 86 },
-    { img: creator2, name: "Elena Petrov", craft: "DJ + Live Sax · Downtown", rate: "from $3,200", rating: "5.00", events: 214 },
-    { img: creator3, name: "Theo Marsh", craft: "Corporate Emcee · Bilingual", rate: "from $2,500", rating: "4.91", events: 67 },
+    { img: creator1, name: "Nadia Wanjiku", craft: "Afrobeats DJ · Westlands", rate: "from KSh 80,000", rating: "4.99", events: 86 },
+    { img: creator2, name: "Elena Achieng", craft: "DJ + Live Sax · Kilimani", rate: "from KSh 145,000", rating: "5.00", events: 214 },
+    { img: creator3, name: "Theo Mwangi", craft: "Corporate Emcee · Bilingual EN/SW", rate: "from KSh 110,000", rating: "4.91", events: 67 },
   ];
   return (
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap items-end justify-between gap-8 mb-16">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Featured Austin talent</div>
+          <div className="tag text-muted-foreground mb-4">§ Featured Nairobi talent</div>
           <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Talent that <span className="italic">books itself.</span></h2>
         </div>
         <a href="#" className="tag inline-flex items-center gap-2 hover:text-accent transition-colors">
-          Browse all Austin talent <ArrowUpRight className="w-3.5 h-3.5" />
+          Browse all Nairobi talent <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
       <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
@@ -312,16 +312,16 @@ function Trust() {
           <p className="mt-6 text-muted-foreground text-lg max-w-xl leading-relaxed">
             You deposit. Cadence holds. The DJ plays. Funds release within 24
             hours of event end. Disputes are reviewed by humans, not algorithms.
-            Finance gets a real invoice — not a Venmo screenshot.
+            Finance gets a real tax invoice — not an M-Pesa screenshot.
           </p>
         </div>
         <div className="lg:col-span-5 space-y-3 font-mono text-sm">
           {[
-            ["BOOKING #ATX-2841", "CONFIRMED"],
-            ["EVENT", "HOLIDAY PARTY · INDEED"],
-            ["DEPOSIT (25%)", "$800.00 · HELD"],
+            ["BOOKING #NBO-2841", "CONFIRMED"],
+            ["EVENT", "END-YEAR PARTY · SAFARICOM"],
+            ["DEPOSIT (25%)", "KSh 36,250 · HELD"],
             ["EVENT DATE", "DEC 12 · 7:00 PM"],
-            ["BALANCE", "$2,400.00 · ESCROW"],
+            ["BALANCE", "KSh 108,750 · ESCROW"],
             ["RELEASE", "T + 24H AUTO"],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between border-b border-border/60 pb-3">
@@ -348,7 +348,7 @@ function CTA() {
         The stage is <span className="italic text-accent">set.</span>
       </motion.h2>
       <p className="mt-8 text-lg text-muted-foreground max-w-xl mx-auto">
-        Whether you're throwing the party or playing it — join the Austin marketplace re-tuning corporate entertainment.
+        Whether you're throwing the party or playing it — join the Nairobi marketplace re-tuning corporate entertainment.
       </p>
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <button className="bg-foreground text-background px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
@@ -356,7 +356,7 @@ function CTA() {
           <ArrowUpRight className="w-4 h-4" />
         </button>
         <button className="bg-secondary text-foreground px-8 py-4 rounded-full inline-flex items-center gap-2 border border-border hover:border-foreground transition-colors">
-          Apply as Austin talent
+          Apply as Nairobi talent
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </div>
@@ -368,7 +368,7 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 lg:px-10 py-10">
       <div className="max-w-[1400px] mx-auto flex flex-wrap justify-between items-center gap-6 tag text-muted-foreground">
-        <div>© 2026 Cadence — Austin's corporate event marketplace.</div>
+        <div>© 2026 Cadence — Nairobi's corporate event marketplace.</div>
         <div className="flex gap-8">
           <a href="#" className="hover:text-foreground transition">Terms</a>
           <a href="#" className="hover:text-foreground transition">Privacy</a>
@@ -381,9 +381,9 @@ function Footer() {
 
 function Categories() {
   const cats = [
-    { Icon: Disc3, name: "Open-format DJs", count: "84" },
+    { Icon: Disc3, name: "Afrobeats DJs", count: "84" },
     { Icon: Mic, name: "Corporate Emcees", count: "42" },
-    { Icon: Sparkles, name: "Conference Hosts", count: "31" },
+    { Icon: Sparkles, name: "Conference MCs", count: "31" },
     { Icon: Music, name: "DJ + Live Sax", count: "18" },
     { Icon: Drama, name: "Brand Activation Hosts", count: "26" },
     { Icon: Camera, name: "Hybrid / Livestream DJs", count: "22" },
@@ -392,10 +392,10 @@ function Categories() {
     <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap justify-between items-end gap-6 mb-14">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Browse Austin</div>
+          <div className="tag text-muted-foreground mb-4">§ Browse Nairobi</div>
           <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">corporate event.</span></h2>
         </div>
-        <p className="max-w-md text-muted-foreground">From SXSW activations to holiday parties at the Driskill, all-hands at the Long Center to product launches downtown — find the right talent for the room.</p>
+        <p className="max-w-md text-muted-foreground">From end-year parties at Villa Rosa Kempinski to product launches at Sarit Expo, all-hands at Radisson Blu to brand activations in Westlands — find the right talent for the room.</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border border border-border">
         {cats.map(({ Icon, name, count }, i) => (
@@ -412,7 +412,7 @@ function Categories() {
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-display text-2xl lg:text-3xl">{name}</div>
-                <div className="tag text-muted-foreground mt-2">{count} in Austin</div>
+                <div className="tag text-muted-foreground mt-2">{count} in Nairobi</div>
               </div>
               <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
             </div>
@@ -467,9 +467,9 @@ function Pricing() {
 
 function Testimonials() {
   const quotes = [
-    { q: "Used to spend two weeks emailing agencies just to get quotes for our holiday party. Booked through Cadence in 90 minutes. Finance loved the invoice and the escrow.", n: "Priya N.", r: "Head of People · Austin SaaS co." },
-    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Marcus K.", r: "Open-format DJ · East Austin" },
-    { q: "Hosted our SXSW activation. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Indeed" },
+    { q: "Used to spend two weeks chasing agencies for quotes for our end-year party. Booked through Cadence in 90 minutes. Finance loved the tax invoice and the escrow.", n: "Priya N.", r: "Head of People · Nairobi SaaS co." },
+    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Kymo", r: "Afrobeats DJ · Westlands" },
+    { q: "Hosted our product launch at Sarit. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Safaricom" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-secondary/40 border-y border-border">
@@ -501,12 +501,12 @@ function Testimonials() {
 
 function FAQ() {
   const items = [
-    { q: "Why only Austin? Why only corporate events?", a: "We're going deep before going wide. By focusing on Austin's corporate scene first, we can personally vet every DJ and host on the platform and guarantee the quality. Other metros and event types are next." },
+    { q: "Why only Nairobi? Why only corporate events?", a: "We're going deep before going wide. By focusing on Nairobi's corporate scene first, we can personally vet every DJ and MC on the platform and guarantee the quality. Mombasa, Kisumu, and other event types are next." },
     { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: talent sets their own rates, you book directly, and we take 7% total to keep the lights on and run escrow." },
-    { q: "How does escrow protect both sides?", a: "You deposit when booking; funds are held by our payment partner (Stripe). The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
+    { q: "How does escrow protect both sides?", a: "You pay via M-Pesa or card when booking; funds are held by our payment partner. The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
     { q: "What if something goes wrong at the event?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
-    { q: "How do you vet the DJs and hosts?", a: "Government ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
-    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their bank within 1–2 business days." },
+    { q: "How do you vet the DJs and MCs?", a: "National ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
+    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their M-Pesa or bank within 1–2 business days." },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
