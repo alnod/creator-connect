@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus } from "lucide-react";
+import { useState } from "react";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
@@ -25,9 +26,13 @@ function Landing() {
       <Hero />
       <Marquee />
       <HowItWorks />
+      <Categories />
       <Features />
       <Creators />
       <Trust />
+      <Pricing />
+      <Testimonials />
+      <FAQ />
       <CTA />
       <Footer />
     </div>
@@ -370,5 +375,167 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function Categories() {
+  const cats = [
+    { Icon: Mic, name: "MCs & Hosts", count: "1,240" },
+    { Icon: Disc3, name: "DJs", count: "2,180" },
+    { Icon: Drama, name: "Comedians", count: "640" },
+    { Icon: Music, name: "Musicians & Bands", count: "3,420" },
+    { Icon: Sparkles, name: "Magicians & Variety", count: "510" },
+    { Icon: Camera, name: "Photo & Video", count: "1,860" },
+  ];
+  return (
+    <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
+      <div className="flex flex-wrap justify-between items-end gap-6 mb-14">
+        <div>
+          <div className="tag text-muted-foreground mb-4">§ Browse</div>
+          <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">stage.</span></h2>
+        </div>
+        <p className="max-w-md text-muted-foreground">From wedding receptions to corporate galas, livestream sets to backyard birthdays — find the right artist for the room.</p>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border border border-border">
+        {cats.map(({ Icon, name, count }, i) => (
+          <motion.a
+            href="#"
+            key={name}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+            className="group bg-background p-8 lg:p-10 hover:bg-secondary/60 transition-colors flex flex-col gap-8 min-h-[200px] justify-between"
+          >
+            <Icon className="w-8 h-8 text-accent" strokeWidth={1.25} />
+            <div className="flex items-end justify-between">
+              <div>
+                <div className="text-display text-2xl lg:text-3xl">{name}</div>
+                <div className="tag text-muted-foreground mt-2">{count} artists</div>
+              </div>
+              <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
+      <div className="grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-5">
+          <div className="tag text-muted-foreground mb-4">§ Pricing</div>
+          <h2 className="text-display text-5xl lg:text-7xl">A fee that <span className="italic">respects</span> the craft.</h2>
+          <p className="mt-6 text-muted-foreground text-lg max-w-md leading-relaxed">
+            Agencies take 15–25%. We take 7%. That's it. No listing fees, no
+            subscriptions, no surprise charges on either side of the booking.
+          </p>
+        </div>
+        <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+          <div className="bg-secondary/40 border border-border p-8 rounded-sm flex flex-col">
+            <div className="tag text-muted-foreground">For creators</div>
+            <div className="text-display text-7xl mt-6">5%</div>
+            <div className="tag text-foreground/60 mt-2">Per completed booking</div>
+            <ul className="mt-8 space-y-3 text-sm text-muted-foreground flex-1">
+              <li className="flex gap-2"><span className="text-accent">→</span> Free profile & portfolio hosting</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Verified badge & performance stats</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Calendar sync, no double-booking</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Guaranteed payouts via escrow</li>
+            </ul>
+          </div>
+          <div className="bg-foreground text-background p-8 rounded-sm flex flex-col relative">
+            <div className="absolute top-4 right-4 tag text-accent">Most use this</div>
+            <div className="tag text-background/60">For clients</div>
+            <div className="text-display text-7xl mt-6">2%</div>
+            <div className="tag text-background/60 mt-2">Service fee at checkout</div>
+            <ul className="mt-8 space-y-3 text-sm text-background/70 flex-1">
+              <li className="flex gap-2"><span className="text-accent">→</span> Unlimited browsing & quotes</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Funds held in escrow until showtime</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Replacement guarantee if cancelled</li>
+              <li className="flex gap-2"><span className="text-accent">→</span> Real human dispute support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const quotes = [
+    { q: "I used to lose 20% to my agent. Now I keep almost all of it, and clients reach me directly. My calendar's been full for 6 months.", n: "Marcus J.", r: "Saxophonist · 142 events" },
+    { q: "Booked a comedian for our company offsite in under an hour. The escrow piece is what sold our finance team.", n: "Priya N.", r: "Head of People · Lattis" },
+    { q: "The review system is brutal in the best way. Real artists rise. The flakes wash out fast.", n: "DJ Halo", r: "Open-format DJ · NYC" },
+  ];
+  return (
+    <section className="py-24 lg:py-32 px-6 lg:px-10 bg-secondary/40 border-y border-border">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="tag text-muted-foreground mb-4">§ Voices</div>
+        <h2 className="text-display text-5xl lg:text-7xl max-w-3xl mb-16">From both sides of the <span className="italic">stage.</span></h2>
+        <div className="grid md:grid-cols-3 gap-px bg-border border border-border">
+          {quotes.map((q, i) => (
+            <motion.figure
+              key={q.n}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-background p-10 flex flex-col justify-between min-h-[320px]"
+            >
+              <blockquote className="text-display text-2xl lg:text-3xl leading-snug">"{q.q}"</blockquote>
+              <figcaption className="mt-8">
+                <div className="text-foreground font-medium">{q.n}</div>
+                <div className="tag text-muted-foreground mt-1">{q.r}</div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  const items = [
+    { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: creators set their own rates, clients book directly, and we take 7% total to keep the lights on and run escrow." },
+    { q: "How does escrow protect both sides?", a: "Clients deposit when booking; funds are held by our payment partner (Stripe). The creator is guaranteed payment if they perform, and the client is guaranteed a replacement or refund if the creator no-shows." },
+    { q: "What if a booking goes wrong?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
+    { q: "How do you verify creators?", a: "Government ID, performance footage review, and at minimum two reference bookings before a creator gets the verified badge. Reputation builds from there via reviews." },
+    { q: "When do creators get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in your bank within 1–2 business days." },
+  ];
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <section className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
+      <div className="grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4">
+          <div className="tag text-muted-foreground mb-4">§ FAQ</div>
+          <h2 className="text-display text-5xl lg:text-6xl">Questions, <span className="italic">answered.</span></h2>
+        </div>
+        <div className="lg:col-span-8">
+          {items.map((it, i) => (
+            <div key={i} className="border-t border-border last:border-b">
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                className="w-full flex items-center justify-between py-6 text-left group"
+              >
+                <span className="text-display text-2xl lg:text-3xl pr-6 group-hover:text-accent transition-colors">{it.q}</span>
+                {open === i ? <Minus className="w-5 h-5 shrink-0 text-accent" /> : <Plus className="w-5 h-5 shrink-0" />}
+              </button>
+              <motion.div
+                initial={false}
+                animate={{ height: open === i ? "auto" : 0, opacity: open === i ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <p className="pb-6 text-muted-foreground max-w-2xl leading-relaxed">{it.a}</p>
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
