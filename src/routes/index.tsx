@@ -261,11 +261,11 @@ function Creators() {
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap items-end justify-between gap-8 mb-16">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Featured Austin talent</div>
+          <div className="tag text-muted-foreground mb-4">§ Featured Nairobi talent</div>
           <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Talent that <span className="italic">books itself.</span></h2>
         </div>
         <a href="#" className="tag inline-flex items-center gap-2 hover:text-accent transition-colors">
-          Browse all Austin talent <ArrowUpRight className="w-3.5 h-3.5" />
+          Browse all Nairobi talent <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
       <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
