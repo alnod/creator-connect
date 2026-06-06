@@ -10,10 +10,10 @@ import creator3 from "@/assets/creator-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cadence — Book artists directly. Skip the agent." },
-      { name: "description", content: "A peer-to-peer marketplace connecting creators with clients. Verified profiles, instant booking, escrow payments, transparent reviews." },
-      { property: "og:title", content: "Cadence — Book artists directly" },
-      { property: "og:description", content: "Direct bookings between creators and clients. No middlemen. No inflated fees." },
+      { title: "Cadence — Book Austin's best corporate DJs & event hosts" },
+      { name: "description", content: "The Austin marketplace for booking corporate DJs and event hosts directly. Verified talent, instant calendars, escrow payments, 7% flat fee. No agencies." },
+      { property: "og:title", content: "Cadence — Austin's corporate event booking platform" },
+      { property: "og:description", content: "Book vetted Austin DJs and emcees for your next company event. Escrow-backed. Agency-free." },
     ],
   }),
   component: Landing,
@@ -77,7 +77,7 @@ function Hero() {
             className="tag text-muted-foreground mb-8 flex items-center gap-3"
           >
             <span className="w-8 h-px bg-foreground/30" />
-            A new chord for live booking
+            Austin · Corporate events
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -85,8 +85,7 @@ function Hero() {
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
             className="text-display text-[clamp(3rem,9vw,8.5rem)]"
           >
-            Book the artist,<br />
-            <span className="italic text-accent">not</span> the agent.
+            Book Austin's best DJs &amp; hosts. <span className="italic text-accent">Without</span> the agency.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -94,9 +93,9 @@ function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed"
           >
-            Cadence is the peer-to-peer marketplace where creators and clients
-            meet without middlemen. Verified portfolios. Instant calendars.
-            Escrowed payments. Honest reviews.
+            Cadence is the marketplace where Austin companies book vetted DJs
+            and event hosts directly — for offsites, holiday parties, product
+            launches, and conferences. Real calendars. Escrow-backed. 7% flat fee.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -105,11 +104,11 @@ function Hero() {
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <button className="group bg-foreground text-background px-6 py-3.5 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
-              Find an artist
+              Book talent for your event
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
             </button>
             <button className="px-6 py-3.5 rounded-full border border-foreground/20 hover:border-foreground transition-colors inline-flex items-center gap-2">
-              List your craft
+              I'm a DJ or host
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
@@ -132,11 +131,11 @@ function Hero() {
             className="absolute -left-6 lg:-left-16 bottom-10 bg-card border border-border p-5 rounded-md shadow-2xl shadow-foreground/10 max-w-[260px]"
           >
             <div className="tag text-accent mb-2">Booked · 2 min ago</div>
-            <div className="text-display text-2xl">Marcus J.</div>
-            <div className="text-sm text-muted-foreground mt-1">Sax · Wedding · $2,400</div>
+            <div className="text-display text-2xl">DJ Marcus K.</div>
+            <div className="text-sm text-muted-foreground mt-1">Holiday party · Indeed · $3,200</div>
             <div className="mt-3 flex items-center gap-1 text-xs text-foreground/70">
               <Stars className="w-3 h-3 fill-accent text-accent" />
-              4.98 · 142 events
+              4.98 · 142 corporate events
             </div>
           </motion.div>
         </motion.div>
@@ -144,10 +143,10 @@ function Hero() {
 
       <div className="mt-20 lg:mt-32 grid grid-cols-2 md:grid-cols-4 gap-y-8 border-t border-border pt-10">
         {[
-          ["0%", "Agent commission"],
-          ["48hr", "Avg. booking time"],
-          ["12k+", "Verified creators"],
-          ["$8.4M", "Held in escrow"],
+          ["0%", "Agency commission"],
+          ["24hr", "Avg. quote turnaround"],
+          ["180+", "Vetted Austin DJs & hosts"],
+          ["$2.1M", "Booked through escrow"],
         ].map(([n, l]) => (
           <div key={l}>
             <div className="text-display text-4xl lg:text-5xl">{n}</div>
@@ -160,7 +159,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const words = ["Musicians", "DJs", "Comedians", "Dancers", "Speakers", "Magicians", "Bands", "Hosts", "Photographers", "Visual artists"];
+  const words = ["Corporate DJs", "Event Hosts", "Emcees", "Open-format DJs", "Conference MCs", "Holiday parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
   const row = [...words, ...words];
   return (
     <section className="border-y border-border bg-secondary/40 py-6 overflow-hidden">
@@ -178,10 +177,10 @@ function Marquee() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Discover", d: "Browse verified creators by craft, city, vibe, or budget. Real portfolios, real performance stats." },
-    { n: "02", t: "Request", d: "Pick a date from a live calendar. Send a brief. Get a quote in hours, not weeks." },
-    { n: "03", t: "Escrow", d: "Funds are held safely until the performance. The creator is guaranteed payment. You're guaranteed they show." },
-    { n: "04", t: "Review", d: "Both sides rate. Reputation is transparent and earned, replacing the agent's vetting." },
+    { n: "01", t: "Discover", d: "Browse vetted Austin DJs and hosts filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
+    { n: "02", t: "Request", d: "Pick a date from a live calendar. Send your event brief. Get a firm quote within 24 hours — not a week of agency back-and-forth." },
+    { n: "03", t: "Escrow", d: "Funds are held safely by Stripe until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
+    { n: "04", t: "Review", d: "Both sides rate after the event. Reputation is transparent, earned, and visible — replacing the agency's vetting." },
   ];
   return (
     <section id="how" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
@@ -217,17 +216,17 @@ function HowItWorks() {
 
 function Features() {
   const items = [
-    { Icon: ShieldCheck, t: "Verified profiles", d: "Identity, performance footage, and past venues — confirmed. Two portals: one for creators, one for clients." },
-    { Icon: CalendarCheck, t: "Live booking", d: "Calendars sync with the artist's real availability. Hold a date in one click, lock it with a deposit." },
-    { Icon: Lock, t: "Escrow payments", d: "Client funds are held securely and released the moment the event concludes successfully. Zero ghosting." },
-    { Icon: Stars, t: "Honest reviews", d: "Both sides rate every booking. Reputation is portable, public, and impossible to fake." },
+    { Icon: ShieldCheck, t: "Hand-vetted talent", d: "Every DJ and host on Cadence is personally onboarded. ID verified, references checked, corporate footage reviewed." },
+    { Icon: CalendarCheck, t: "Live calendars", d: "See real availability for every artist. Hold a date instantly, lock it with a deposit, get a confirmation in your inbox." },
+    { Icon: Lock, t: "Escrow + invoicing", d: "Funds sit safely in Stripe escrow until the event ends. Finance teams get proper invoices, not Venmo screenshots." },
+    { Icon: Stars, t: "Honest reviews", d: "Every booking generates a two-way review. Reputation is public, portable, and impossible to fake." },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-foreground text-background">
       <div className="max-w-[1400px] mx-auto">
         <div className="tag text-accent mb-6">§ Built-in trust</div>
         <h2 className="text-display text-5xl lg:text-7xl max-w-3xl">
-          Everything an agency does. <span className="italic text-background/60">Built into the platform.</span>
+          Everything an agency does. <span className="italic text-background/60">Built for Austin's corporate scene.</span>
         </h2>
         <div className="mt-20 grid md:grid-cols-2 gap-x-16 gap-y-16">
           {items.map(({ Icon, t, d }, i) => (
@@ -254,19 +253,19 @@ function Features() {
 
 function Creators() {
   const list = [
-    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ", rate: "$1,800", rating: "4.99", events: 86 },
-    { img: creator2, name: "Elena Petrov", craft: "String quartet lead", rate: "$3,200", rating: "5.00", events: 214 },
-    { img: creator3, name: "Theo Marsh", craft: "Stand-up comedian", rate: "$2,500", rating: "4.91", events: 67 },
+    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ · East Austin", rate: "from $1,800", rating: "4.99", events: 86 },
+    { img: creator2, name: "Elena Petrov", craft: "DJ + Live Sax · Downtown", rate: "from $3,200", rating: "5.00", events: 214 },
+    { img: creator3, name: "Theo Marsh", craft: "Corporate Emcee · Bilingual", rate: "from $2,500", rating: "4.91", events: 67 },
   ];
   return (
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap items-end justify-between gap-8 mb-16">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Featured</div>
-          <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Artists, booking <span className="italic">themselves.</span></h2>
+          <div className="tag text-muted-foreground mb-4">§ Featured Austin talent</div>
+          <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Talent that <span className="italic">books itself.</span></h2>
         </div>
         <a href="#" className="tag inline-flex items-center gap-2 hover:text-accent transition-colors">
-          Browse all creators <ArrowUpRight className="w-3.5 h-3.5" />
+          Browse all Austin talent <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
       <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
@@ -311,16 +310,18 @@ function Trust() {
             <span className="italic">Released on the encore.</span>
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-xl leading-relaxed">
-            Clients deposit. Cadence holds. The artist plays. Funds release within
-            24 hours. Disputes are resolved by humans, not algorithms.
+            You deposit. Cadence holds. The DJ plays. Funds release within 24
+            hours of event end. Disputes are reviewed by humans, not algorithms.
+            Finance gets a real invoice — not a Venmo screenshot.
           </p>
         </div>
         <div className="lg:col-span-5 space-y-3 font-mono text-sm">
           {[
-            ["BOOKING #C-2841", "CONFIRMED"],
-            ["DEPOSIT (25%)", "$600.00 · HELD"],
-            ["EVENT DATE", "MAR 14 · 8:00 PM"],
-            ["BALANCE", "$1,800.00 · ESCROW"],
+            ["BOOKING #ATX-2841", "CONFIRMED"],
+            ["EVENT", "HOLIDAY PARTY · INDEED"],
+            ["DEPOSIT (25%)", "$800.00 · HELD"],
+            ["EVENT DATE", "DEC 12 · 7:00 PM"],
+            ["BALANCE", "$2,400.00 · ESCROW"],
             ["RELEASE", "T + 24H AUTO"],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between border-b border-border/60 pb-3">
@@ -344,18 +345,18 @@ function CTA() {
         transition={{ duration: 0.8 }}
         className="text-display text-6xl lg:text-9xl"
       >
-        The stage is <span className="italic text-accent">open.</span>
+        The stage is <span className="italic text-accent">set.</span>
       </motion.h2>
       <p className="mt-8 text-lg text-muted-foreground max-w-xl mx-auto">
-        Join the marketplace re-tuning how live talent gets booked.
+        Whether you're throwing the party or playing it — join the Austin marketplace re-tuning corporate entertainment.
       </p>
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <button className="bg-foreground text-background px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
-          I'm a creator
+          Book talent for my event
           <ArrowUpRight className="w-4 h-4" />
         </button>
         <button className="bg-secondary text-foreground px-8 py-4 rounded-full inline-flex items-center gap-2 border border-border hover:border-foreground transition-colors">
-          I'm booking talent
+          Apply as Austin talent
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </div>
@@ -367,7 +368,7 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 lg:px-10 py-10">
       <div className="max-w-[1400px] mx-auto flex flex-wrap justify-between items-center gap-6 tag text-muted-foreground">
-        <div>© 2026 Cadence — Direct bookings, honest scenes.</div>
+        <div>© 2026 Cadence — Austin's corporate event marketplace.</div>
         <div className="flex gap-8">
           <a href="#" className="hover:text-foreground transition">Terms</a>
           <a href="#" className="hover:text-foreground transition">Privacy</a>
@@ -380,21 +381,21 @@ function Footer() {
 
 function Categories() {
   const cats = [
-    { Icon: Mic, name: "MCs & Hosts", count: "1,240" },
-    { Icon: Disc3, name: "DJs", count: "2,180" },
-    { Icon: Drama, name: "Comedians", count: "640" },
-    { Icon: Music, name: "Musicians & Bands", count: "3,420" },
-    { Icon: Sparkles, name: "Magicians & Variety", count: "510" },
-    { Icon: Camera, name: "Photo & Video", count: "1,860" },
+    { Icon: Disc3, name: "Open-format DJs", count: "84" },
+    { Icon: Mic, name: "Corporate Emcees", count: "42" },
+    { Icon: Sparkles, name: "Conference Hosts", count: "31" },
+    { Icon: Music, name: "DJ + Live Sax", count: "18" },
+    { Icon: Drama, name: "Brand Activation Hosts", count: "26" },
+    { Icon: Camera, name: "Hybrid / Livestream DJs", count: "22" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap justify-between items-end gap-6 mb-14">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Browse</div>
-          <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">stage.</span></h2>
+          <div className="tag text-muted-foreground mb-4">§ Browse Austin</div>
+          <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">corporate event.</span></h2>
         </div>
-        <p className="max-w-md text-muted-foreground">From wedding receptions to corporate galas, livestream sets to backyard birthdays — find the right artist for the room.</p>
+        <p className="max-w-md text-muted-foreground">From SXSW activations to holiday parties at the Driskill, all-hands at the Long Center to product launches downtown — find the right talent for the room.</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border border border-border">
         {cats.map(({ Icon, name, count }, i) => (
@@ -411,7 +412,7 @@ function Categories() {
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-display text-2xl lg:text-3xl">{name}</div>
-                <div className="tag text-muted-foreground mt-2">{count} artists</div>
+                <div className="tag text-muted-foreground mt-2">{count} in Austin</div>
               </div>
               <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
             </div>
@@ -466,9 +467,9 @@ function Pricing() {
 
 function Testimonials() {
   const quotes = [
-    { q: "I used to lose 20% to my agent. Now I keep almost all of it, and clients reach me directly. My calendar's been full for 6 months.", n: "Marcus J.", r: "Saxophonist · 142 events" },
-    { q: "Booked a comedian for our company offsite in under an hour. The escrow piece is what sold our finance team.", n: "Priya N.", r: "Head of People · Lattis" },
-    { q: "The review system is brutal in the best way. Real artists rise. The flakes wash out fast.", n: "DJ Halo", r: "Open-format DJ · NYC" },
+    { q: "Used to spend two weeks emailing agencies just to get quotes for our holiday party. Booked through Cadence in 90 minutes. Finance loved the invoice and the escrow.", n: "Priya N.", r: "Head of People · Austin SaaS co." },
+    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Marcus K.", r: "Open-format DJ · East Austin" },
+    { q: "Hosted our SXSW activation. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Indeed" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-secondary/40 border-y border-border">
@@ -500,11 +501,12 @@ function Testimonials() {
 
 function FAQ() {
   const items = [
-    { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: creators set their own rates, clients book directly, and we take 7% total to keep the lights on and run escrow." },
-    { q: "How does escrow protect both sides?", a: "Clients deposit when booking; funds are held by our payment partner (Stripe). The creator is guaranteed payment if they perform, and the client is guaranteed a replacement or refund if the creator no-shows." },
-    { q: "What if a booking goes wrong?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
-    { q: "How do you verify creators?", a: "Government ID, performance footage review, and at minimum two reference bookings before a creator gets the verified badge. Reputation builds from there via reviews." },
-    { q: "When do creators get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in your bank within 1–2 business days." },
+    { q: "Why only Austin? Why only corporate events?", a: "We're going deep before going wide. By focusing on Austin's corporate scene first, we can personally vet every DJ and host on the platform and guarantee the quality. Other metros and event types are next." },
+    { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: talent sets their own rates, you book directly, and we take 7% total to keep the lights on and run escrow." },
+    { q: "How does escrow protect both sides?", a: "You deposit when booking; funds are held by our payment partner (Stripe). The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
+    { q: "What if something goes wrong at the event?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
+    { q: "How do you vet the DJs and hosts?", a: "Government ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
+    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their bank within 1–2 business days." },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
