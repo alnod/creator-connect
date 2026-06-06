@@ -159,7 +159,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const words = ["Corporate DJs", "Event Hosts", "Emcees", "Open-format DJs", "Conference MCs", "Holiday parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
+  const words = ["Corporate DJs", "Event MCs", "Emcees", "Afrobeats DJs", "Conference MCs", "End-year parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
   const row = [...words, ...words];
   return (
     <section className="border-y border-border bg-secondary/40 py-6 overflow-hidden">
