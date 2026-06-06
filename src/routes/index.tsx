@@ -379,21 +379,21 @@ function Footer() {
 
 function Categories() {
   const cats = [
-    { Icon: Mic, name: "MCs & Hosts", count: "1,240" },
-    { Icon: Disc3, name: "DJs", count: "2,180" },
-    { Icon: Drama, name: "Comedians", count: "640" },
-    { Icon: Music, name: "Musicians & Bands", count: "3,420" },
-    { Icon: Sparkles, name: "Magicians & Variety", count: "510" },
-    { Icon: Camera, name: "Photo & Video", count: "1,860" },
+    { Icon: Disc3, name: "Open-format DJs", count: "84" },
+    { Icon: Mic, name: "Corporate Emcees", count: "42" },
+    { Icon: Sparkles, name: "Conference Hosts", count: "31" },
+    { Icon: Music, name: "DJ + Live Sax", count: "18" },
+    { Icon: Drama, name: "Brand Activation Hosts", count: "26" },
+    { Icon: Camera, name: "Hybrid / Livestream DJs", count: "22" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap justify-between items-end gap-6 mb-14">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Browse</div>
-          <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">stage.</span></h2>
+          <div className="tag text-muted-foreground mb-4">§ Browse Austin</div>
+          <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">corporate event.</span></h2>
         </div>
-        <p className="max-w-md text-muted-foreground">From wedding receptions to corporate galas, livestream sets to backyard birthdays — find the right artist for the room.</p>
+        <p className="max-w-md text-muted-foreground">From SXSW activations to holiday parties at the Driskill, all-hands at the Long Center to product launches downtown — find the right talent for the room.</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border border border-border">
         {cats.map(({ Icon, name, count }, i) => (
@@ -410,7 +410,7 @@ function Categories() {
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-display text-2xl lg:text-3xl">{name}</div>
-                <div className="tag text-muted-foreground mt-2">{count} artists</div>
+                <div className="tag text-muted-foreground mt-2">{count} in Austin</div>
               </div>
               <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
             </div>
@@ -465,9 +465,9 @@ function Pricing() {
 
 function Testimonials() {
   const quotes = [
-    { q: "I used to lose 20% to my agent. Now I keep almost all of it, and clients reach me directly. My calendar's been full for 6 months.", n: "Marcus J.", r: "Saxophonist · 142 events" },
-    { q: "Booked a comedian for our company offsite in under an hour. The escrow piece is what sold our finance team.", n: "Priya N.", r: "Head of People · Lattis" },
-    { q: "The review system is brutal in the best way. Real artists rise. The flakes wash out fast.", n: "DJ Halo", r: "Open-format DJ · NYC" },
+    { q: "Used to spend two weeks emailing agencies just to get quotes for our holiday party. Booked through Cadence in 90 minutes. Finance loved the invoice and the escrow.", n: "Priya N.", r: "Head of People · Austin SaaS co." },
+    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Marcus K.", r: "Open-format DJ · East Austin" },
+    { q: "Hosted our SXSW activation. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Indeed" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-secondary/40 border-y border-border">
@@ -499,11 +499,12 @@ function Testimonials() {
 
 function FAQ() {
   const items = [
-    { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: creators set their own rates, clients book directly, and we take 7% total to keep the lights on and run escrow." },
-    { q: "How does escrow protect both sides?", a: "Clients deposit when booking; funds are held by our payment partner (Stripe). The creator is guaranteed payment if they perform, and the client is guaranteed a replacement or refund if the creator no-shows." },
-    { q: "What if a booking goes wrong?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
-    { q: "How do you verify creators?", a: "Government ID, performance footage review, and at minimum two reference bookings before a creator gets the verified badge. Reputation builds from there via reviews." },
-    { q: "When do creators get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in your bank within 1–2 business days." },
+    { q: "Why only Austin? Why only corporate events?", a: "We're going deep before going wide. By focusing on Austin's corporate scene first, we can personally vet every DJ and host on the platform and guarantee the quality. Other metros and event types are next." },
+    { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: talent sets their own rates, you book directly, and we take 7% total to keep the lights on and run escrow." },
+    { q: "How does escrow protect both sides?", a: "You deposit when booking; funds are held by our payment partner (Stripe). The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
+    { q: "What if something goes wrong at the event?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
+    { q: "How do you vet the DJs and hosts?", a: "Government ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
+    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their bank within 1–2 business days." },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
