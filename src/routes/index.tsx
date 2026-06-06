@@ -501,12 +501,12 @@ function Testimonials() {
 
 function FAQ() {
   const items = [
-    { q: "Why only Austin? Why only corporate events?", a: "We're going deep before going wide. By focusing on Austin's corporate scene first, we can personally vet every DJ and host on the platform and guarantee the quality. Other metros and event types are next." },
+    { q: "Why only Nairobi? Why only corporate events?", a: "We're going deep before going wide. By focusing on Nairobi's corporate scene first, we can personally vet every DJ and MC on the platform and guarantee the quality. Mombasa, Kisumu, and other event types are next." },
     { q: "How is Cadence different from a booking agency?", a: "Agencies take 15–25% and gate-keep introductions. We're a self-serve marketplace: talent sets their own rates, you book directly, and we take 7% total to keep the lights on and run escrow." },
-    { q: "How does escrow protect both sides?", a: "You deposit when booking; funds are held by our payment partner (Stripe). The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
+    { q: "How does escrow protect both sides?", a: "You pay via M-Pesa or card when booking; funds are held by our payment partner. The talent is guaranteed payment if they perform, and you're guaranteed a replacement or refund if they no-show." },
     { q: "What if something goes wrong at the event?", a: "Either side can open a dispute within 7 days. A real human on our trust team reviews evidence and decides. Most disputes are resolved within 48 hours." },
-    { q: "How do you vet the DJs and hosts?", a: "Government ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
-    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their bank within 1–2 business days." },
+    { q: "How do you vet the DJs and MCs?", a: "National ID, performance footage review, references from at least two past corporate clients, and a 1:1 onboarding call. Roughly 1 in 4 applicants makes it onto the platform." },
+    { q: "When does the talent get paid?", a: "Funds release automatically 24 hours after the event end-time, assuming no dispute. Payouts land in their M-Pesa or bank within 1–2 business days." },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
