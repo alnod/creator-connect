@@ -10,10 +10,10 @@ import creator3 from "@/assets/creator-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cadence — Book Austin's best corporate DJs & event hosts" },
-      { name: "description", content: "The Austin marketplace for booking corporate DJs and event hosts directly. Verified talent, instant calendars, escrow payments, 7% flat fee. No agencies." },
-      { property: "og:title", content: "Cadence — Austin's corporate event booking platform" },
-      { property: "og:description", content: "Book vetted Austin DJs and emcees for your next company event. Escrow-backed. Agency-free." },
+      { title: "Cadence — Book Nairobi's best corporate DJs & event MCs" },
+      { name: "description", content: "Kenya's marketplace for booking corporate DJs and event MCs directly. Verified talent, live calendars, M-Pesa & card escrow, 7% flat fee. No agencies." },
+      { property: "og:title", content: "Cadence — Nairobi's corporate event booking platform" },
+      { property: "og:description", content: "Book vetted Nairobi DJs and MCs for your next company event. Escrow-backed. Agency-free." },
     ],
   }),
   component: Landing,
