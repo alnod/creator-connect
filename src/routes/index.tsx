@@ -226,7 +226,7 @@ function Features() {
       <div className="max-w-[1400px] mx-auto">
         <div className="tag text-accent mb-6">§ Built-in trust</div>
         <h2 className="text-display text-5xl lg:text-7xl max-w-3xl">
-          Everything an agency does. <span className="italic text-background/60">Built for Austin's corporate scene.</span>
+          Everything an agency does. <span className="italic text-background/60">Built for Nairobi's corporate scene.</span>
         </h2>
         <div className="mt-20 grid md:grid-cols-2 gap-x-16 gap-y-16">
           {items.map(({ Icon, t, d }, i) => (
