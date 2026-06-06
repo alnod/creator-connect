@@ -177,10 +177,10 @@ function Marquee() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Discover", d: "Browse verified creators by craft, city, vibe, or budget. Real portfolios, real performance stats." },
-    { n: "02", t: "Request", d: "Pick a date from a live calendar. Send a brief. Get a quote in hours, not weeks." },
-    { n: "03", t: "Escrow", d: "Funds are held safely until the performance. The creator is guaranteed payment. You're guaranteed they show." },
-    { n: "04", t: "Review", d: "Both sides rate. Reputation is transparent and earned, replacing the agent's vetting." },
+    { n: "01", t: "Discover", d: "Browse vetted Austin DJs and hosts filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
+    { n: "02", t: "Request", d: "Pick a date from a live calendar. Send your event brief. Get a firm quote within 24 hours — not a week of agency back-and-forth." },
+    { n: "03", t: "Escrow", d: "Funds are held safely by Stripe until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
+    { n: "04", t: "Review", d: "Both sides rate after the event. Reputation is transparent, earned, and visible — replacing the agency's vetting." },
   ];
   return (
     <section id="how" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
@@ -216,17 +216,17 @@ function HowItWorks() {
 
 function Features() {
   const items = [
-    { Icon: ShieldCheck, t: "Verified profiles", d: "Identity, performance footage, and past venues — confirmed. Two portals: one for creators, one for clients." },
-    { Icon: CalendarCheck, t: "Live booking", d: "Calendars sync with the artist's real availability. Hold a date in one click, lock it with a deposit." },
-    { Icon: Lock, t: "Escrow payments", d: "Client funds are held securely and released the moment the event concludes successfully. Zero ghosting." },
-    { Icon: Stars, t: "Honest reviews", d: "Both sides rate every booking. Reputation is portable, public, and impossible to fake." },
+    { Icon: ShieldCheck, t: "Hand-vetted talent", d: "Every DJ and host on Cadence is personally onboarded. ID verified, references checked, corporate footage reviewed." },
+    { Icon: CalendarCheck, t: "Live calendars", d: "See real availability for every artist. Hold a date instantly, lock it with a deposit, get a confirmation in your inbox." },
+    { Icon: Lock, t: "Escrow + invoicing", d: "Funds sit safely in Stripe escrow until the event ends. Finance teams get proper invoices, not Venmo screenshots." },
+    { Icon: Stars, t: "Honest reviews", d: "Every booking generates a two-way review. Reputation is public, portable, and impossible to fake." },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-foreground text-background">
       <div className="max-w-[1400px] mx-auto">
         <div className="tag text-accent mb-6">§ Built-in trust</div>
         <h2 className="text-display text-5xl lg:text-7xl max-w-3xl">
-          Everything an agency does. <span className="italic text-background/60">Built into the platform.</span>
+          Everything an agency does. <span className="italic text-background/60">Built for Austin's corporate scene.</span>
         </h2>
         <div className="mt-20 grid md:grid-cols-2 gap-x-16 gap-y-16">
           {items.map(({ Icon, t, d }, i) => (
@@ -253,9 +253,9 @@ function Features() {
 
 function Creators() {
   const list = [
-    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ", rate: "$1,800", rating: "4.99", events: 86 },
-    { img: creator2, name: "Elena Petrov", craft: "String quartet lead", rate: "$3,200", rating: "5.00", events: 214 },
-    { img: creator3, name: "Theo Marsh", craft: "Stand-up comedian", rate: "$2,500", rating: "4.91", events: 67 },
+    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ · East Austin", rate: "from $1,800", rating: "4.99", events: 86 },
+    { img: creator2, name: "Elena Petrov", craft: "DJ + Live Sax · Downtown", rate: "from $3,200", rating: "5.00", events: 214 },
+    { img: creator3, name: "Theo Marsh", craft: "Corporate Emcee · Bilingual", rate: "from $2,500", rating: "4.91", events: 67 },
   ];
   return (
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
