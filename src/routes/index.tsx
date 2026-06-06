@@ -392,10 +392,10 @@ function Categories() {
     <section className="py-24 lg:py-32 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap justify-between items-end gap-6 mb-14">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Browse Austin</div>
+          <div className="tag text-muted-foreground mb-4">§ Browse Nairobi</div>
           <h2 className="text-display text-5xl lg:text-7xl">Every kind of <span className="italic">corporate event.</span></h2>
         </div>
-        <p className="max-w-md text-muted-foreground">From SXSW activations to holiday parties at the Driskill, all-hands at the Long Center to product launches downtown — find the right talent for the room.</p>
+        <p className="max-w-md text-muted-foreground">From end-year parties at Villa Rosa Kempinski to product launches at Sarit Expo, all-hands at Radisson Blu to brand activations in Westlands — find the right talent for the room.</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border border border-border">
         {cats.map(({ Icon, name, count }, i) => (
