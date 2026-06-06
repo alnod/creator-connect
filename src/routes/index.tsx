@@ -77,7 +77,7 @@ function Hero() {
             className="tag text-muted-foreground mb-8 flex items-center gap-3"
           >
             <span className="w-8 h-px bg-foreground/30" />
-            Austin · Corporate events
+            Nairobi · Corporate events
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
