@@ -348,7 +348,7 @@ function CTA() {
         The stage is <span className="italic text-accent">set.</span>
       </motion.h2>
       <p className="mt-8 text-lg text-muted-foreground max-w-xl mx-auto">
-        Whether you're throwing the party or playing it — join the Austin marketplace re-tuning corporate entertainment.
+        Whether you're throwing the party or playing it — join the Nairobi marketplace re-tuning corporate entertainment.
       </p>
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <button className="bg-foreground text-background px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
