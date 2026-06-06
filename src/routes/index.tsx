@@ -85,7 +85,7 @@ function Hero() {
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
             className="text-display text-[clamp(3rem,9vw,8.5rem)]"
           >
-            Book Austin's best DJs &amp; hosts. <span className="italic text-accent">Without</span> the agency.
+            Book Nairobi's best DJs &amp; MCs. <span className="italic text-accent">Without</span> the agency.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -93,9 +93,9 @@ function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed"
           >
-            Cadence is the marketplace where Austin companies book vetted DJs
-            and event hosts directly — for offsites, holiday parties, product
-            launches, and conferences. Real calendars. Escrow-backed. 7% flat fee.
+            Cadence is the marketplace where Nairobi companies book vetted DJs
+            and MCs directly — for offsites, end-year parties, product launches,
+            and conferences. Live calendars. M-Pesa &amp; card escrow. 7% flat fee.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
