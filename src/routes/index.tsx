@@ -356,7 +356,7 @@ function CTA() {
           <ArrowUpRight className="w-4 h-4" />
         </button>
         <button className="bg-secondary text-foreground px-8 py-4 rounded-full inline-flex items-center gap-2 border border-border hover:border-foreground transition-colors">
-          Apply as Austin talent
+          Apply as Nairobi talent
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </div>
