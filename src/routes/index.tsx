@@ -381,9 +381,9 @@ function Footer() {
 
 function Categories() {
   const cats = [
-    { Icon: Disc3, name: "Open-format DJs", count: "84" },
+    { Icon: Disc3, name: "Afrobeats DJs", count: "84" },
     { Icon: Mic, name: "Corporate Emcees", count: "42" },
-    { Icon: Sparkles, name: "Conference Hosts", count: "31" },
+    { Icon: Sparkles, name: "Conference MCs", count: "31" },
     { Icon: Music, name: "DJ + Live Sax", count: "18" },
     { Icon: Drama, name: "Brand Activation Hosts", count: "26" },
     { Icon: Camera, name: "Hybrid / Livestream DJs", count: "22" },
