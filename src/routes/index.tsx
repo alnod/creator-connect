@@ -412,7 +412,7 @@ function Categories() {
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-display text-2xl lg:text-3xl">{name}</div>
-                <div className="tag text-muted-foreground mt-2">{count} in Austin</div>
+                <div className="tag text-muted-foreground mt-2">{count} in Nairobi</div>
               </div>
               <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
             </div>
