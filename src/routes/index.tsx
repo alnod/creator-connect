@@ -261,11 +261,11 @@ function Creators() {
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap items-end justify-between gap-8 mb-16">
         <div>
-          <div className="tag text-muted-foreground mb-4">§ Featured</div>
-          <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Artists, booking <span className="italic">themselves.</span></h2>
+          <div className="tag text-muted-foreground mb-4">§ Featured Austin talent</div>
+          <h2 className="text-display text-5xl lg:text-7xl max-w-2xl">Talent that <span className="italic">books itself.</span></h2>
         </div>
         <a href="#" className="tag inline-flex items-center gap-2 hover:text-accent transition-colors">
-          Browse all creators <ArrowUpRight className="w-3.5 h-3.5" />
+          Browse all Austin talent <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
       <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
@@ -310,16 +310,18 @@ function Trust() {
             <span className="italic">Released on the encore.</span>
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-xl leading-relaxed">
-            Clients deposit. Cadence holds. The artist plays. Funds release within
-            24 hours. Disputes are resolved by humans, not algorithms.
+            You deposit. Cadence holds. The DJ plays. Funds release within 24
+            hours of event end. Disputes are reviewed by humans, not algorithms.
+            Finance gets a real invoice — not a Venmo screenshot.
           </p>
         </div>
         <div className="lg:col-span-5 space-y-3 font-mono text-sm">
           {[
-            ["BOOKING #C-2841", "CONFIRMED"],
-            ["DEPOSIT (25%)", "$600.00 · HELD"],
-            ["EVENT DATE", "MAR 14 · 8:00 PM"],
-            ["BALANCE", "$1,800.00 · ESCROW"],
+            ["BOOKING #ATX-2841", "CONFIRMED"],
+            ["EVENT", "HOLIDAY PARTY · INDEED"],
+            ["DEPOSIT (25%)", "$800.00 · HELD"],
+            ["EVENT DATE", "DEC 12 · 7:00 PM"],
+            ["BALANCE", "$2,400.00 · ESCROW"],
             ["RELEASE", "T + 24H AUTO"],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between border-b border-border/60 pb-3">
@@ -343,18 +345,18 @@ function CTA() {
         transition={{ duration: 0.8 }}
         className="text-display text-6xl lg:text-9xl"
       >
-        The stage is <span className="italic text-accent">open.</span>
+        The stage is <span className="italic text-accent">set.</span>
       </motion.h2>
       <p className="mt-8 text-lg text-muted-foreground max-w-xl mx-auto">
-        Join the marketplace re-tuning how live talent gets booked.
+        Whether you're throwing the party or playing it — join the Austin marketplace re-tuning corporate entertainment.
       </p>
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <button className="bg-foreground text-background px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
-          I'm a creator
+          Book talent for my event
           <ArrowUpRight className="w-4 h-4" />
         </button>
         <button className="bg-secondary text-foreground px-8 py-4 rounded-full inline-flex items-center gap-2 border border-border hover:border-foreground transition-colors">
-          I'm booking talent
+          Apply as Austin talent
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </div>
@@ -366,7 +368,7 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 lg:px-10 py-10">
       <div className="max-w-[1400px] mx-auto flex flex-wrap justify-between items-center gap-6 tag text-muted-foreground">
-        <div>© 2026 Cadence — Direct bookings, honest scenes.</div>
+        <div>© 2026 Cadence — Austin's corporate event marketplace.</div>
         <div className="flex gap-8">
           <a href="#" className="hover:text-foreground transition">Terms</a>
           <a href="#" className="hover:text-foreground transition">Privacy</a>
