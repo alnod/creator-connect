@@ -145,8 +145,8 @@ function Hero() {
         {[
           ["0%", "Agency commission"],
           ["24hr", "Avg. quote turnaround"],
-          ["180+", "Vetted Austin DJs & hosts"],
-          ["$2.1M", "Booked through escrow"],
+          ["180+", "Vetted Nairobi DJs & MCs"],
+          ["KSh 95M", "Booked through escrow"],
         ].map(([n, l]) => (
           <div key={l}>
             <div className="text-display text-4xl lg:text-5xl">{n}</div>
