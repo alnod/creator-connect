@@ -312,7 +312,7 @@ function Trust() {
           <p className="mt-6 text-muted-foreground text-lg max-w-xl leading-relaxed">
             You deposit. Cadence holds. The DJ plays. Funds release within 24
             hours of event end. Disputes are reviewed by humans, not algorithms.
-            Finance gets a real invoice — not a Venmo screenshot.
+            Finance gets a real tax invoice — not an M-Pesa screenshot.
           </p>
         </div>
         <div className="lg:col-span-5 space-y-3 font-mono text-sm">
