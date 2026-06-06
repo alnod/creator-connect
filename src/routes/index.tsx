@@ -317,11 +317,11 @@ function Trust() {
         </div>
         <div className="lg:col-span-5 space-y-3 font-mono text-sm">
           {[
-            ["BOOKING #ATX-2841", "CONFIRMED"],
-            ["EVENT", "HOLIDAY PARTY · INDEED"],
-            ["DEPOSIT (25%)", "$800.00 · HELD"],
+            ["BOOKING #NBO-2841", "CONFIRMED"],
+            ["EVENT", "END-YEAR PARTY · SAFARICOM"],
+            ["DEPOSIT (25%)", "KSh 36,250 · HELD"],
             ["EVENT DATE", "DEC 12 · 7:00 PM"],
-            ["BALANCE", "$2,400.00 · ESCROW"],
+            ["BALANCE", "KSh 108,750 · ESCROW"],
             ["RELEASE", "T + 24H AUTO"],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between border-b border-border/60 pb-3">
