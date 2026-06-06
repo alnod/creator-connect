@@ -177,9 +177,9 @@ function Marquee() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Discover", d: "Browse vetted Austin DJs and hosts filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
+    { n: "01", t: "Discover", d: "Browse vetted Nairobi DJs and MCs filtered by event type, date, vibe, and budget. Real corporate footage, real client references." },
     { n: "02", t: "Request", d: "Pick a date from a live calendar. Send your event brief. Get a firm quote within 24 hours — not a week of agency back-and-forth." },
-    { n: "03", t: "Escrow", d: "Funds are held safely by Stripe until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
+    { n: "03", t: "Escrow", d: "Funds are held safely via M-Pesa or card until the event wraps. The talent is guaranteed payment. You're guaranteed they show up." },
     { n: "04", t: "Review", d: "Both sides rate after the event. Reputation is transparent, earned, and visible — replacing the agency's vetting." },
   ];
   return (
