@@ -108,7 +108,7 @@ function Hero() {
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
             </button>
             <button className="px-6 py-3.5 rounded-full border border-foreground/20 hover:border-foreground transition-colors inline-flex items-center gap-2">
-              I'm a DJ or host
+              I'm a DJ or MC
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
