@@ -77,7 +77,7 @@ function Hero() {
             className="tag text-muted-foreground mb-8 flex items-center gap-3"
           >
             <span className="w-8 h-px bg-foreground/30" />
-            A new chord for live booking
+            Austin · Corporate events
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -85,8 +85,7 @@ function Hero() {
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
             className="text-display text-[clamp(3rem,9vw,8.5rem)]"
           >
-            Book the artist,<br />
-            <span className="italic text-accent">not</span> the agent.
+            Book Austin's best DJs &amp; hosts. <span className="italic text-accent">Without</span> the agency.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -94,9 +93,9 @@ function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed"
           >
-            Cadence is the peer-to-peer marketplace where creators and clients
-            meet without middlemen. Verified portfolios. Instant calendars.
-            Escrowed payments. Honest reviews.
+            Cadence is the marketplace where Austin companies book vetted DJs
+            and event hosts directly — for offsites, holiday parties, product
+            launches, and conferences. Real calendars. Escrow-backed. 7% flat fee.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -105,11 +104,11 @@ function Hero() {
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <button className="group bg-foreground text-background px-6 py-3.5 rounded-full inline-flex items-center gap-2 hover:bg-accent transition-colors">
-              Find an artist
+              Book talent for your event
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
             </button>
             <button className="px-6 py-3.5 rounded-full border border-foreground/20 hover:border-foreground transition-colors inline-flex items-center gap-2">
-              List your craft
+              I'm a DJ or host
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
@@ -132,11 +131,11 @@ function Hero() {
             className="absolute -left-6 lg:-left-16 bottom-10 bg-card border border-border p-5 rounded-md shadow-2xl shadow-foreground/10 max-w-[260px]"
           >
             <div className="tag text-accent mb-2">Booked · 2 min ago</div>
-            <div className="text-display text-2xl">Marcus J.</div>
-            <div className="text-sm text-muted-foreground mt-1">Sax · Wedding · $2,400</div>
+            <div className="text-display text-2xl">DJ Marcus K.</div>
+            <div className="text-sm text-muted-foreground mt-1">Holiday party · Indeed · $3,200</div>
             <div className="mt-3 flex items-center gap-1 text-xs text-foreground/70">
               <Stars className="w-3 h-3 fill-accent text-accent" />
-              4.98 · 142 events
+              4.98 · 142 corporate events
             </div>
           </motion.div>
         </motion.div>
@@ -144,10 +143,10 @@ function Hero() {
 
       <div className="mt-20 lg:mt-32 grid grid-cols-2 md:grid-cols-4 gap-y-8 border-t border-border pt-10">
         {[
-          ["0%", "Agent commission"],
-          ["48hr", "Avg. booking time"],
-          ["12k+", "Verified creators"],
-          ["$8.4M", "Held in escrow"],
+          ["0%", "Agency commission"],
+          ["24hr", "Avg. quote turnaround"],
+          ["180+", "Vetted Austin DJs & hosts"],
+          ["$2.1M", "Booked through escrow"],
         ].map(([n, l]) => (
           <div key={l}>
             <div className="text-display text-4xl lg:text-5xl">{n}</div>
@@ -160,7 +159,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const words = ["Musicians", "DJs", "Comedians", "Dancers", "Speakers", "Magicians", "Bands", "Hosts", "Photographers", "Visual artists"];
+  const words = ["Corporate DJs", "Event Hosts", "Emcees", "Open-format DJs", "Conference MCs", "Holiday parties", "Product launches", "Offsites", "Brand activations", "Happy hours"];
   const row = [...words, ...words];
   return (
     <section className="border-y border-border bg-secondary/40 py-6 overflow-hidden">
