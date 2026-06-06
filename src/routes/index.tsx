@@ -10,10 +10,10 @@ import creator3 from "@/assets/creator-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cadence — Book artists directly. Skip the agent." },
-      { name: "description", content: "A peer-to-peer marketplace connecting creators with clients. Verified profiles, instant booking, escrow payments, transparent reviews." },
-      { property: "og:title", content: "Cadence — Book artists directly" },
-      { property: "og:description", content: "Direct bookings between creators and clients. No middlemen. No inflated fees." },
+      { title: "Cadence — Book Austin's best corporate DJs & event hosts" },
+      { name: "description", content: "The Austin marketplace for booking corporate DJs and event hosts directly. Verified talent, instant calendars, escrow payments, 7% flat fee. No agencies." },
+      { property: "og:title", content: "Cadence — Austin's corporate event booking platform" },
+      { property: "og:description", content: "Book vetted Austin DJs and emcees for your next company event. Escrow-backed. Agency-free." },
     ],
   }),
   component: Landing,
