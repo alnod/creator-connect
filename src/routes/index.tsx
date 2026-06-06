@@ -467,9 +467,9 @@ function Pricing() {
 
 function Testimonials() {
   const quotes = [
-    { q: "Used to spend two weeks emailing agencies just to get quotes for our holiday party. Booked through Cadence in 90 minutes. Finance loved the invoice and the escrow.", n: "Priya N.", r: "Head of People · Austin SaaS co." },
-    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Marcus K.", r: "Open-format DJ · East Austin" },
-    { q: "Hosted our SXSW activation. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Indeed" },
+    { q: "Used to spend two weeks chasing agencies for quotes for our end-year party. Booked through Cadence in 90 minutes. Finance loved the tax invoice and the escrow.", n: "Priya N.", r: "Head of People · Nairobi SaaS co." },
+    { q: "I was paying 22% to an agency for corporate gigs. Switched to Cadence and that money goes back into my rig. My calendar's been booked solid since Q2.", n: "DJ Kymo", r: "Afrobeats DJ · Westlands" },
+    { q: "Hosted our product launch at Sarit. The vetting is real — every DJ on this platform actually plays corporate, not just clubs. Huge difference.", n: "Jordan R.", r: "Brand Marketing · Safaricom" },
   ];
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-10 bg-secondary/40 border-y border-border">
