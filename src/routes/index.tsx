@@ -368,7 +368,7 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 lg:px-10 py-10">
       <div className="max-w-[1400px] mx-auto flex flex-wrap justify-between items-center gap-6 tag text-muted-foreground">
-        <div>© 2026 Cadence — Austin's corporate event marketplace.</div>
+        <div>© 2026 Cadence — Nairobi's corporate event marketplace.</div>
         <div className="flex gap-8">
           <a href="#" className="hover:text-foreground transition">Terms</a>
           <a href="#" className="hover:text-foreground transition">Privacy</a>
