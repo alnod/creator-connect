@@ -131,8 +131,8 @@ function Hero() {
             className="absolute -left-6 lg:-left-16 bottom-10 bg-card border border-border p-5 rounded-md shadow-2xl shadow-foreground/10 max-w-[260px]"
           >
             <div className="tag text-accent mb-2">Booked · 2 min ago</div>
-            <div className="text-display text-2xl">DJ Marcus K.</div>
-            <div className="text-sm text-muted-foreground mt-1">Holiday party · Indeed · $3,200</div>
+            <div className="text-display text-2xl">DJ Kymo</div>
+            <div className="text-sm text-muted-foreground mt-1">End-year party · Safaricom · KSh 145,000</div>
             <div className="mt-3 flex items-center gap-1 text-xs text-foreground/70">
               <Stars className="w-3 h-3 fill-accent text-accent" />
               4.98 · 142 corporate events
