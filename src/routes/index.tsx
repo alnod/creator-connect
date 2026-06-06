@@ -253,9 +253,9 @@ function Features() {
 
 function Creators() {
   const list = [
-    { img: creator1, name: "Nadia Vance", craft: "Open-format DJ · East Austin", rate: "from $1,800", rating: "4.99", events: 86 },
-    { img: creator2, name: "Elena Petrov", craft: "DJ + Live Sax · Downtown", rate: "from $3,200", rating: "5.00", events: 214 },
-    { img: creator3, name: "Theo Marsh", craft: "Corporate Emcee · Bilingual", rate: "from $2,500", rating: "4.91", events: 67 },
+    { img: creator1, name: "Nadia Wanjiku", craft: "Afrobeats DJ · Westlands", rate: "from KSh 80,000", rating: "4.99", events: 86 },
+    { img: creator2, name: "Elena Achieng", craft: "DJ + Live Sax · Kilimani", rate: "from KSh 145,000", rating: "5.00", events: 214 },
+    { img: creator3, name: "Theo Mwangi", craft: "Corporate Emcee · Bilingual EN/SW", rate: "from KSh 110,000", rating: "4.91", events: 67 },
   ];
   return (
     <section id="creators" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
