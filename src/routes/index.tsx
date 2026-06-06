@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus } from "lucide-react";
+import { useState } from "react";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
@@ -25,9 +26,13 @@ function Landing() {
       <Hero />
       <Marquee />
       <HowItWorks />
+      <Categories />
       <Features />
       <Creators />
       <Trust />
+      <Pricing />
+      <Testimonials />
+      <FAQ />
       <CTA />
       <Footer />
     </div>
