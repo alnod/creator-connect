@@ -495,28 +495,30 @@ function BookingWidget() {
         {/* Right: brief + submit */}
         <div className="lg:col-span-4 bg-secondary/40 p-6 lg:p-8">
           <div className="tag text-accent mb-4">03 · Event brief</div>
-          {submitted ? (
+          {submitted && result ? (
             <div className="flex flex-col h-full">
               <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center mb-5">
                 <Check className="w-5 h-5" />
               </div>
-              <div className="text-display text-2xl leading-tight">Request sent to {available.length} {available.length === 1 ? "calendar" : "calendars"}.</div>
+              <div className="text-display text-2xl leading-tight">Request sent to {result.pinged.length} {result.pinged.length === 1 ? "calendar" : "calendars"}.</div>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                 We just pinged{" "}
                 <span className="text-foreground">
-                  {available
-                    .map((id) => creators.find((c) => c.id === id)?.name)
+                  {result.pinged
+                    .map((id) => creators.find((c: CreatorWithBusy) => c.id === id)?.name)
                     .filter(Boolean)
                     .join(", ")}
                 </span>{" "}
                 for {eventType.toLowerCase()} on{" "}
                 <span className="text-foreground">{date && format(date, "EEE, MMM d, yyyy")}</span> ({hours}h
                 {venue ? `, ${venue}` : ""}). Expect firm quotes at <span className="text-foreground">{email}</span>{" "}
-                within 24 hours.
+                within 24 hours. Ref{" "}
+                <span className="text-foreground font-mono text-xs">#{result.request_id.slice(0, 8)}</span>.
               </p>
               <div className="mt-6 grid grid-cols-3 gap-px bg-border rounded-sm overflow-hidden border border-border text-xs">
-                {available.map((id) => {
-                  const c = creators.find((x) => x.id === id)!;
+                {result.pinged.map((id) => {
+                  const c = creators.find((x: CreatorWithBusy) => x.id === id);
+                  if (!c) return null;
                   return (
                     <div key={id} className="bg-background p-3">
                       <div className="text-display text-sm truncate">{c.name}</div>
