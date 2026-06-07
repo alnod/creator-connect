@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin } from "lucide-react";
+import { useMemo, useState } from "react";
+import { format, addDays, isSameDay } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
