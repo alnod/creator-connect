@@ -31,6 +31,7 @@ function Landing() {
       <Categories />
       <Features />
       <Creators />
+      <BookingWidget />
       <Trust />
       <Pricing />
       <Testimonials />
