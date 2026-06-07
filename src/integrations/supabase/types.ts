@@ -14,7 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booking_request_creators: {
+        Row: {
+          creator_id: string
+          request_id: string
+          status: string
+        }
+        Insert: {
+          creator_id: string
+          request_id: string
+          status?: string
+        }
+        Update: {
+          creator_id?: string
+          request_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_request_creators_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creators"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booking_request_creators_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "booking_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_requests: {
+        Row: {
+          created_at: string
+          email: string
+          event_date: string
+          event_type: string
+          hours: number
+          id: string
+          venue: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          event_date: string
+          event_type: string
+          hours: number
+          id?: string
+          venue: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          event_date?: string
+          event_type?: string
+          hours?: number
+          id?: string
+          venue?: string
+        }
+        Relationships: []
+      }
+      creator_busy_dates: {
+        Row: {
+          busy_date: string
+          creator_id: string
+        }
+        Insert: {
+          busy_date: string
+          creator_id: string
+        }
+        Update: {
+          busy_date?: string
+          creator_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_busy_dates_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creators: {
+        Row: {
+          area: string
+          craft: string
+          created_at: string
+          id: string
+          image_key: string
+          name: string
+          rate: number
+          sort_order: number
+        }
+        Insert: {
+          area: string
+          craft: string
+          created_at?: string
+          id: string
+          image_key: string
+          name: string
+          rate: number
+          sort_order?: number
+        }
+        Update: {
+          area?: string
+          craft?: string
+          created_at?: string
+          id?: string
+          image_key?: string
+          name?: string
+          rate?: number
+          sort_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
