@@ -604,9 +604,16 @@ function BookingWidget() {
                 disabled={!canSubmit}
                 className="mt-2 group bg-foreground text-background px-5 py-3 rounded-full inline-flex items-center justify-center gap-2 hover:bg-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
-                Send request to {available.length || selectedCreators.length} {(available.length || selectedCreators.length) === 1 ? "calendar" : "calendars"}
+                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                {submitting
+                  ? "Sending…"
+                  : `Send request to ${available.length || selectedCreators.length} ${
+                      (available.length || selectedCreators.length) === 1 ? "calendar" : "calendars"
+                    }`}
               </button>
+              {submitError && (
+                <p className="text-xs text-destructive">{submitError}</p>
+              )}
               <p className="text-xs text-muted-foreground leading-relaxed">
                 No charge yet. Funds only move to escrow once you confirm a quote.
                 Cadence takes a flat 7% — no agency markup.
