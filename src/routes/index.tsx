@@ -427,9 +427,13 @@ function BookingWidget() {
         <div className="lg:col-span-4 bg-background p-6 lg:p-8">
           <div className="tag text-accent mb-4">01 · Choose talent</div>
           <div className="space-y-3">
-            {creators.map((c) => {
+            {loadingCreators && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground p-3">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading talent calendars…
+              </div>
+            )}
+            {creators.map((c: CreatorWithBusy) => {
               const active = selectedCreators.includes(c.id);
-              const hasConflict = date && busyByCreator[c.id].some((d) => isSameDay(d, date));
               return (
                 <button
                   key={c.id}
