@@ -1,13 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin } from "lucide-react";
-import { useMemo, useState } from "react";
-import { format, addDays, isSameDay } from "date-fns";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin, Loader2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { format, addDays, isSameDay, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { listCreatorsWithBusy, submitBookingRequest, type CreatorWithBusy } from "@/lib/booking.functions";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
 import creator3 from "@/assets/creator-3.jpg";
+
+const CREATOR_IMG: Record<string, string> = {
+  "creator-1": creator1,
+  "creator-2": creator2,
+  "creator-3": creator3,
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -304,47 +313,98 @@ function Creators() {
 }
 
 function BookingWidget() {
-  const creators = [
-    { id: "nadia", name: "Nadia Wanjiku", craft: "Afrobeats DJ", area: "Westlands", rate: 80000, img: creator1, busyOffsets: [2, 5, 9, 14, 21] },
-    { id: "elena", name: "Elena Achieng", craft: "DJ + Live Sax", area: "Kilimani", rate: 145000, img: creator2, busyOffsets: [1, 6, 7, 12, 19, 28] },
-    { id: "theo", name: "Theo Mwangi", craft: "Corporate Emcee", area: "CBD · Bilingual EN/SW", rate: 110000, img: creator3, busyOffsets: [3, 4, 11, 17, 24] },
-  ];
+  const fetchCreators = useServerFn(listCreatorsWithBusy);
+  const submitFn = useServerFn(submitBookingRequest);
+
+  const { data: creators = [], isLoading: loadingCreators } = useQuery({
+    queryKey: ["creators-with-busy"],
+    queryFn: () => fetchCreators(),
+  });
 
   const eventTypes = ["End-year party", "Product launch", "Conference", "Brand activation", "Offsite", "Happy hour"];
-  const today = useMemo(() => new Date(), []);
-  const busyByCreator = useMemo(
-    () => Object.fromEntries(creators.map((c) => [c.id, c.busyOffsets.map((d) => addDays(today, d))])),
-    [today],
+  const today = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
+  const busyByCreator = useMemo<Record<string, Date[]>>(
+    () =>
+      Object.fromEntries(
+        creators.map((c: CreatorWithBusy) => [c.id, c.busy_dates.map((d) => parseISO(d))]),
+      ),
+    [creators],
   );
 
-  const [selectedCreators, setSelectedCreators] = useState<string[]>(["nadia", "theo"]);
+  const [selectedCreators, setSelectedCreators] = useState<string[]>([]);
   const [date, setDate] = useState<Date | undefined>(addDays(today, 10));
   const [eventType, setEventType] = useState(eventTypes[0]);
   const [hours, setHours] = useState(4);
   const [venue, setVenue] = useState("");
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string } | null>(null);
+
+  // Default-select first 2 creators once data arrives
+  useEffect(() => {
+    if (selectedCreators.length === 0 && creators.length > 0) {
+      setSelectedCreators(creators.slice(0, 2).map((c: CreatorWithBusy) => c.id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [creators.length]);
 
   const toggleCreator = (id: string) =>
     setSelectedCreators((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const conflicts = selectedCreators.filter((id) =>
-    date ? busyByCreator[id].some((d) => isSameDay(d, date)) : false,
+    date ? (busyByCreator[id] ?? []).some((d) => isSameDay(d, date)) : false,
   );
   const available = selectedCreators.filter((id) => !conflicts.includes(id));
 
-  const canSubmit = selectedCreators.length > 0 && date && email.includes("@") && available.length > 0;
+  const canSubmit =
+    selectedCreators.length > 0 &&
+    !!date &&
+    email.includes("@") &&
+    venue.trim().length >= 2 &&
+    available.length > 0 &&
+    !submitting;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) return;
-    setSubmitted(true);
+    if (!canSubmit || !date) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await submitFn({
+        data: {
+          event_date: format(date, "yyyy-MM-dd"),
+          event_type: eventType,
+          hours,
+          venue: venue.trim(),
+          email: email.trim(),
+          creator_ids: selectedCreators,
+        },
+      });
+      if (!res.ok) {
+        setSubmitError("All selected creators are booked on that date. Try another date.");
+      } else {
+        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id });
+      }
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const reset = () => {
-    setSubmitted(false);
+    setResult(null);
+    setSubmitError(null);
     setVenue("");
   };
+
+  const submitted = result !== null;
 
   return (
     <section id="book" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
@@ -367,9 +427,13 @@ function BookingWidget() {
         <div className="lg:col-span-4 bg-background p-6 lg:p-8">
           <div className="tag text-accent mb-4">01 · Choose talent</div>
           <div className="space-y-3">
-            {creators.map((c) => {
+            {loadingCreators && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground p-3">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading talent calendars…
+              </div>
+            )}
+            {creators.map((c: CreatorWithBusy) => {
               const active = selectedCreators.includes(c.id);
-              const hasConflict = date && busyByCreator[c.id].some((d) => isSameDay(d, date));
               return (
                 <button
                   key={c.id}
@@ -379,7 +443,7 @@ function BookingWidget() {
                     active ? "border-foreground bg-secondary/60" : "border-border hover:border-foreground/40"
                   }`}
                 >
-                  <img src={c.img} alt={c.name} className="w-14 h-14 object-cover rounded-sm" />
+                  <img src={CREATOR_IMG[c.image_key] ?? creator1} alt={c.name} className="w-14 h-14 object-cover rounded-sm" />
                   <div className="flex-1 min-w-0">
                     <div className="text-display text-lg leading-tight truncate">{c.name}</div>
                     <div className="text-xs text-muted-foreground truncate">{c.craft} · {c.area}</div>
@@ -414,7 +478,7 @@ function BookingWidget() {
               onSelect={setDate}
               disabled={(d) => d < today}
               modifiers={{
-                busy: selectedCreators.flatMap((id) => busyByCreator[id]),
+                busy: selectedCreators.flatMap((id) => busyByCreator[id] ?? []),
               }}
               modifiersClassNames={{
                 busy: "relative after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent",
@@ -431,28 +495,30 @@ function BookingWidget() {
         {/* Right: brief + submit */}
         <div className="lg:col-span-4 bg-secondary/40 p-6 lg:p-8">
           <div className="tag text-accent mb-4">03 · Event brief</div>
-          {submitted ? (
+          {submitted && result ? (
             <div className="flex flex-col h-full">
               <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center mb-5">
                 <Check className="w-5 h-5" />
               </div>
-              <div className="text-display text-2xl leading-tight">Request sent to {available.length} {available.length === 1 ? "calendar" : "calendars"}.</div>
+              <div className="text-display text-2xl leading-tight">Request sent to {result.pinged.length} {result.pinged.length === 1 ? "calendar" : "calendars"}.</div>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                 We just pinged{" "}
                 <span className="text-foreground">
-                  {available
-                    .map((id) => creators.find((c) => c.id === id)?.name)
+                  {result.pinged
+                    .map((id) => creators.find((c: CreatorWithBusy) => c.id === id)?.name)
                     .filter(Boolean)
                     .join(", ")}
                 </span>{" "}
                 for {eventType.toLowerCase()} on{" "}
                 <span className="text-foreground">{date && format(date, "EEE, MMM d, yyyy")}</span> ({hours}h
                 {venue ? `, ${venue}` : ""}). Expect firm quotes at <span className="text-foreground">{email}</span>{" "}
-                within 24 hours.
+                within 24 hours. Ref{" "}
+                <span className="text-foreground font-mono text-xs">#{result.request_id.slice(0, 8)}</span>.
               </p>
               <div className="mt-6 grid grid-cols-3 gap-px bg-border rounded-sm overflow-hidden border border-border text-xs">
-                {available.map((id) => {
-                  const c = creators.find((x) => x.id === id)!;
+                {result.pinged.map((id) => {
+                  const c = creators.find((x: CreatorWithBusy) => x.id === id);
+                  if (!c) return null;
                   return (
                     <div key={id} className="bg-background p-3">
                       <div className="text-display text-sm truncate">{c.name}</div>
@@ -512,7 +578,7 @@ function BookingWidget() {
               </div>
 
               <div>
-                <label className="tag text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" /> Venue (optional)</label>
+                <label className="tag text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" /> Venue</label>
                 <input
                   value={venue}
                   onChange={(e) => setVenue(e.target.value)}
@@ -538,9 +604,16 @@ function BookingWidget() {
                 disabled={!canSubmit}
                 className="mt-2 group bg-foreground text-background px-5 py-3 rounded-full inline-flex items-center justify-center gap-2 hover:bg-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
-                Send request to {available.length || selectedCreators.length} {(available.length || selectedCreators.length) === 1 ? "calendar" : "calendars"}
+                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                {submitting
+                  ? "Sending…"
+                  : `Send request to ${available.length || selectedCreators.length} ${
+                      (available.length || selectedCreators.length) === 1 ? "calendar" : "calendars"
+                    }`}
               </button>
+              {submitError && (
+                <p className="text-xs text-destructive">{submitError}</p>
+              )}
               <p className="text-xs text-muted-foreground leading-relaxed">
                 No charge yet. Funds only move to escrow once you confirm a quote.
                 Cadence takes a flat 7% — no agency markup.
