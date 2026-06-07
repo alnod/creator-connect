@@ -478,7 +478,7 @@ function BookingWidget() {
               onSelect={setDate}
               disabled={(d) => d < today}
               modifiers={{
-                busy: selectedCreators.flatMap((id) => busyByCreator[id]),
+                busy: selectedCreators.flatMap((id) => busyByCreator[id] ?? []),
               }}
               modifiersClassNames={{
                 busy: "relative after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent",
