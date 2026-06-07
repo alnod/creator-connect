@@ -439,7 +439,7 @@ function BookingWidget() {
                     active ? "border-foreground bg-secondary/60" : "border-border hover:border-foreground/40"
                   }`}
                 >
-                  <img src={c.img} alt={c.name} className="w-14 h-14 object-cover rounded-sm" />
+                  <img src={CREATOR_IMG[c.image_key] ?? creator1} alt={c.name} className="w-14 h-14 object-cover rounded-sm" />
                   <div className="flex-1 min-w-0">
                     <div className="text-display text-lg leading-tight truncate">{c.name}</div>
                     <div className="text-xs text-muted-foreground truncate">{c.craft} · {c.area}</div>
