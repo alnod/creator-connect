@@ -313,47 +313,98 @@ function Creators() {
 }
 
 function BookingWidget() {
-  const creators = [
-    { id: "nadia", name: "Nadia Wanjiku", craft: "Afrobeats DJ", area: "Westlands", rate: 80000, img: creator1, busyOffsets: [2, 5, 9, 14, 21] },
-    { id: "elena", name: "Elena Achieng", craft: "DJ + Live Sax", area: "Kilimani", rate: 145000, img: creator2, busyOffsets: [1, 6, 7, 12, 19, 28] },
-    { id: "theo", name: "Theo Mwangi", craft: "Corporate Emcee", area: "CBD · Bilingual EN/SW", rate: 110000, img: creator3, busyOffsets: [3, 4, 11, 17, 24] },
-  ];
+  const fetchCreators = useServerFn(listCreatorsWithBusy);
+  const submitFn = useServerFn(submitBookingRequest);
+
+  const { data: creators = [], isLoading: loadingCreators } = useQuery({
+    queryKey: ["creators-with-busy"],
+    queryFn: () => fetchCreators(),
+  });
 
   const eventTypes = ["End-year party", "Product launch", "Conference", "Brand activation", "Offsite", "Happy hour"];
-  const today = useMemo(() => new Date(), []);
-  const busyByCreator = useMemo(
-    () => Object.fromEntries(creators.map((c) => [c.id, c.busyOffsets.map((d) => addDays(today, d))])),
-    [today],
+  const today = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
+  const busyByCreator = useMemo<Record<string, Date[]>>(
+    () =>
+      Object.fromEntries(
+        creators.map((c: CreatorWithBusy) => [c.id, c.busy_dates.map((d) => parseISO(d))]),
+      ),
+    [creators],
   );
 
-  const [selectedCreators, setSelectedCreators] = useState<string[]>(["nadia", "theo"]);
+  const [selectedCreators, setSelectedCreators] = useState<string[]>([]);
   const [date, setDate] = useState<Date | undefined>(addDays(today, 10));
   const [eventType, setEventType] = useState(eventTypes[0]);
   const [hours, setHours] = useState(4);
   const [venue, setVenue] = useState("");
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string } | null>(null);
+
+  // Default-select first 2 creators once data arrives
+  useMemo(() => {
+    if (selectedCreators.length === 0 && creators.length > 0) {
+      setSelectedCreators(creators.slice(0, 2).map((c: CreatorWithBusy) => c.id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [creators.length]);
 
   const toggleCreator = (id: string) =>
     setSelectedCreators((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const conflicts = selectedCreators.filter((id) =>
-    date ? busyByCreator[id].some((d) => isSameDay(d, date)) : false,
+    date ? (busyByCreator[id] ?? []).some((d) => isSameDay(d, date)) : false,
   );
   const available = selectedCreators.filter((id) => !conflicts.includes(id));
 
-  const canSubmit = selectedCreators.length > 0 && date && email.includes("@") && available.length > 0;
+  const canSubmit =
+    selectedCreators.length > 0 &&
+    !!date &&
+    email.includes("@") &&
+    venue.trim().length >= 2 &&
+    available.length > 0 &&
+    !submitting;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) return;
-    setSubmitted(true);
+    if (!canSubmit || !date) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await submitFn({
+        data: {
+          event_date: format(date, "yyyy-MM-dd"),
+          event_type: eventType,
+          hours,
+          venue: venue.trim(),
+          email: email.trim(),
+          creator_ids: selectedCreators,
+        },
+      });
+      if (!res.ok) {
+        setSubmitError("All selected creators are booked on that date. Try another date.");
+      } else {
+        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id });
+      }
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const reset = () => {
-    setSubmitted(false);
+    setResult(null);
+    setSubmitError(null);
     setVenue("");
   };
+
+  const submitted = result !== null;
 
   return (
     <section id="book" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
