@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin } from "lucide-react";
+import { useMemo, useState } from "react";
+import { format, addDays, isSameDay } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
@@ -29,6 +31,7 @@ function Landing() {
       <Categories />
       <Features />
       <Creators />
+      <BookingWidget />
       <Trust />
       <Pricing />
       <Testimonials />
@@ -52,6 +55,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-10 tag text-foreground/70">
           <a href="#how" className="hover:text-foreground transition">How it works</a>
           <a href="#creators" className="hover:text-foreground transition">Creators</a>
+          <a href="#book" className="hover:text-foreground transition">Book a date</a>
           <a href="#trust" className="hover:text-foreground transition">Trust</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -294,6 +298,256 @@ function Creators() {
             </div>
           </motion.article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function BookingWidget() {
+  const creators = [
+    { id: "nadia", name: "Nadia Wanjiku", craft: "Afrobeats DJ", area: "Westlands", rate: 80000, img: creator1, busyOffsets: [2, 5, 9, 14, 21] },
+    { id: "elena", name: "Elena Achieng", craft: "DJ + Live Sax", area: "Kilimani", rate: 145000, img: creator2, busyOffsets: [1, 6, 7, 12, 19, 28] },
+    { id: "theo", name: "Theo Mwangi", craft: "Corporate Emcee", area: "CBD · Bilingual EN/SW", rate: 110000, img: creator3, busyOffsets: [3, 4, 11, 17, 24] },
+  ];
+
+  const eventTypes = ["End-year party", "Product launch", "Conference", "Brand activation", "Offsite", "Happy hour"];
+  const today = useMemo(() => new Date(), []);
+  const busyByCreator = useMemo(
+    () => Object.fromEntries(creators.map((c) => [c.id, c.busyOffsets.map((d) => addDays(today, d))])),
+    [today],
+  );
+
+  const [selectedCreators, setSelectedCreators] = useState<string[]>(["nadia", "theo"]);
+  const [date, setDate] = useState<Date | undefined>(addDays(today, 10));
+  const [eventType, setEventType] = useState(eventTypes[0]);
+  const [hours, setHours] = useState(4);
+  const [venue, setVenue] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const toggleCreator = (id: string) =>
+    setSelectedCreators((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+
+  const conflicts = selectedCreators.filter((id) =>
+    date ? busyByCreator[id].some((d) => isSameDay(d, date)) : false,
+  );
+  const available = selectedCreators.filter((id) => !conflicts.includes(id));
+
+  const canSubmit = selectedCreators.length > 0 && date && email.includes("@") && available.length > 0;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    setSubmitted(true);
+  };
+
+  const reset = () => {
+    setSubmitted(false);
+    setVenue("");
+  };
+
+  return (
+    <section id="book" className="py-24 lg:py-40 px-6 lg:px-10 max-w-[1400px] mx-auto">
+      <div className="grid lg:grid-cols-12 gap-10 mb-14">
+        <div className="lg:col-span-6">
+          <div className="tag text-muted-foreground mb-4">§ Book a date · Nairobi</div>
+          <h2 className="text-display text-5xl lg:text-7xl">
+            Pick a date. <span className="italic">We ping the right calendars.</span>
+          </h2>
+        </div>
+        <p className="lg:col-span-5 lg:col-start-8 text-lg text-muted-foreground self-end">
+          Select one or more vetted Nairobi creators, choose your event date, and
+          send a brief in under 60 seconds. Requests land directly on each artist's
+          calendar — no agents, no phone tag.
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-12 gap-px bg-border rounded-sm overflow-hidden border border-border">
+        {/* Left: creator picker */}
+        <div className="lg:col-span-4 bg-background p-6 lg:p-8">
+          <div className="tag text-accent mb-4">01 · Choose talent</div>
+          <div className="space-y-3">
+            {creators.map((c) => {
+              const active = selectedCreators.includes(c.id);
+              const hasConflict = date && busyByCreator[c.id].some((d) => isSameDay(d, date));
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => toggleCreator(c.id)}
+                  className={`w-full text-left flex items-center gap-4 p-3 rounded-sm border transition-colors ${
+                    active ? "border-foreground bg-secondary/60" : "border-border hover:border-foreground/40"
+                  }`}
+                >
+                  <img src={c.img} alt={c.name} className="w-14 h-14 object-cover rounded-sm" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-display text-lg leading-tight truncate">{c.name}</div>
+                    <div className="text-xs text-muted-foreground truncate">{c.craft} · {c.area}</div>
+                    <div className="tag text-accent mt-1">from KSh {c.rate.toLocaleString()}</div>
+                  </div>
+                  <div
+                    className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 ${
+                      active ? "bg-foreground border-foreground text-background" : "border-foreground/30"
+                    }`}
+                  >
+                    {active && <Check className="w-3.5 h-3.5" />}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          {date && conflicts.length > 0 && (
+            <div className="mt-5 text-xs text-muted-foreground border-l-2 border-accent pl-3">
+              {conflicts.length} of your picks {conflicts.length === 1 ? "is" : "are"} already booked on{" "}
+              {format(date, "MMM d")}. We'll only ping the {available.length} available.
+            </div>
+          )}
+        </div>
+
+        {/* Middle: calendar */}
+        <div className="lg:col-span-4 bg-background p-6 lg:p-8 flex flex-col">
+          <div className="tag text-accent mb-4">02 · Pick a date</div>
+          <div className="flex-1 flex items-center justify-center">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              disabled={(d) => d < today}
+              modifiers={{
+                busy: selectedCreators.flatMap((id) => busyByCreator[id]),
+              }}
+              modifiersClassNames={{
+                busy: "relative after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent",
+              }}
+              className="pointer-events-auto"
+            />
+          </div>
+          <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-accent" /> Has conflicts</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-foreground" /> Selected</span>
+          </div>
+        </div>
+
+        {/* Right: brief + submit */}
+        <div className="lg:col-span-4 bg-secondary/40 p-6 lg:p-8">
+          <div className="tag text-accent mb-4">03 · Event brief</div>
+          {submitted ? (
+            <div className="flex flex-col h-full">
+              <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center mb-5">
+                <Check className="w-5 h-5" />
+              </div>
+              <div className="text-display text-2xl leading-tight">Request sent to {available.length} {available.length === 1 ? "calendar" : "calendars"}.</div>
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                We just pinged{" "}
+                <span className="text-foreground">
+                  {available
+                    .map((id) => creators.find((c) => c.id === id)?.name)
+                    .filter(Boolean)
+                    .join(", ")}
+                </span>{" "}
+                for {eventType.toLowerCase()} on{" "}
+                <span className="text-foreground">{date && format(date, "EEE, MMM d, yyyy")}</span> ({hours}h
+                {venue ? `, ${venue}` : ""}). Expect firm quotes at <span className="text-foreground">{email}</span>{" "}
+                within 24 hours.
+              </p>
+              <div className="mt-6 grid grid-cols-3 gap-px bg-border rounded-sm overflow-hidden border border-border text-xs">
+                {available.map((id) => {
+                  const c = creators.find((x) => x.id === id)!;
+                  return (
+                    <div key={id} className="bg-background p-3">
+                      <div className="text-display text-sm truncate">{c.name}</div>
+                      <div className="text-muted-foreground mt-1 flex items-center gap-1"><Clock className="w-3 h-3" /> Pinged</div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                onClick={reset}
+                className="mt-auto self-start tag inline-flex items-center gap-2 hover:text-accent transition-colors pt-8"
+              >
+                Send another request <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <div>
+                <label className="tag text-muted-foreground">Event type</label>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {eventTypes.map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setEventType(t)}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                        eventType === t
+                          ? "border-foreground bg-foreground text-background"
+                          : "border-border hover:border-foreground/50"
+                      }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="tag text-muted-foreground">Hours</label>
+                  <div className="mt-2 flex items-center border border-border rounded-sm">
+                    <button type="button" onClick={() => setHours((h) => Math.max(1, h - 1))} className="px-3 py-2 hover:bg-secondary">
+                      <Minus className="w-3 h-3" />
+                    </button>
+                    <div className="flex-1 text-center text-sm">{hours}h</div>
+                    <button type="button" onClick={() => setHours((h) => Math.min(12, h + 1))} className="px-3 py-2 hover:bg-secondary">
+                      <Plus className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label className="tag text-muted-foreground">Date</label>
+                  <div className="mt-2 px-3 py-2 border border-border rounded-sm text-sm bg-background">
+                    {date ? format(date, "MMM d, yyyy") : "Pick a date"}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="tag text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" /> Venue (optional)</label>
+                <input
+                  value={venue}
+                  onChange={(e) => setVenue(e.target.value)}
+                  placeholder="Sarit Expo Centre, Westlands"
+                  className="mt-2 w-full px-3 py-2 border border-border rounded-sm text-sm bg-background focus:border-foreground outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="tag text-muted-foreground">Your email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="you@company.co.ke"
+                  className="mt-2 w-full px-3 py-2 border border-border rounded-sm text-sm bg-background focus:border-foreground outline-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="mt-2 group bg-foreground text-background px-5 py-3 rounded-full inline-flex items-center justify-center gap-2 hover:bg-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <Send className="w-4 h-4" />
+                Send request to {available.length || selectedCreators.length} {(available.length || selectedCreators.length) === 1 ? "calendar" : "calendars"}
+              </button>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                No charge yet. Funds only move to escrow once you confirm a quote.
+                Cadence takes a flat 7% — no agency markup.
+              </p>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );
