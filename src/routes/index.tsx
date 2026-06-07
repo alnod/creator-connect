@@ -55,6 +55,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-10 tag text-foreground/70">
           <a href="#how" className="hover:text-foreground transition">How it works</a>
           <a href="#creators" className="hover:text-foreground transition">Creators</a>
+          <a href="#book" className="hover:text-foreground transition">Book a date</a>
           <a href="#trust" className="hover:text-foreground transition">Trust</a>
         </nav>
         <div className="flex items-center gap-3">
