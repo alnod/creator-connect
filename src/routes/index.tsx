@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin, Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { format, addDays, isSameDay, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { listCreatorsWithBusy, submitBookingRequest, type CreatorWithBusy } from "@/lib/booking.functions";
