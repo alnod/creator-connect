@@ -1,13 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, CalendarCheck, Lock, Stars, ArrowRight, Music, Mic, Disc3, Sparkles, Camera, Drama, Plus, Minus, Check, Send, Clock, MapPin, Loader2 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { format, addDays, isSameDay } from "date-fns";
+import { format, addDays, isSameDay, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { listCreatorsWithBusy, submitBookingRequest, type CreatorWithBusy } from "@/lib/booking.functions";
 import heroImg from "@/assets/hero-performer.jpg";
 import creator1 from "@/assets/creator-1.jpg";
 import creator2 from "@/assets/creator-2.jpg";
 import creator3 from "@/assets/creator-3.jpg";
+
+const CREATOR_IMG: Record<string, string> = {
+  "creator-1": creator1,
+  "creator-2": creator2,
+  "creator-3": creator3,
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
