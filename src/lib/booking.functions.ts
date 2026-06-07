@@ -8,19 +8,20 @@ export type CreatorWithBusy = {
   area: string;
   rate: number;
   image_key: string;
-  busy_dates: string[]; // ISO yyyy-mm-dd
+  busy_dates: string[];
 };
 
 export const listCreatorsWithBusy = createServerFn({ method: "GET" }).handler(
   async (): Promise<CreatorWithBusy[]> => {
-    const { data: creators, error: cErr } = await supabase
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: creators, error: cErr } = await supabaseAdmin
       .from("creators")
       .select("id, name, craft, area, rate, image_key, sort_order")
       .order("sort_order", { ascending: true });
     if (cErr) throw new Error(cErr.message);
 
     const today = new Date().toISOString().slice(0, 10);
-    const { data: busy, error: bErr } = await supabase
+    const { data: busy, error: bErr } = await supabaseAdmin
       .from("creator_busy_dates")
       .select("creator_id, busy_date")
       .gte("busy_date", today);
@@ -28,12 +29,12 @@ export const listCreatorsWithBusy = createServerFn({ method: "GET" }).handler(
 
     const byCreator = new Map<string, string[]>();
     for (const row of busy ?? []) {
-      const list = byCreator.get(row.creator_id) ?? [];
+      const list = byCreator.get(row.creator_id as string) ?? [];
       list.push(row.busy_date as string);
-      byCreator.set(row.creator_id, list);
+      byCreator.set(row.creator_id as string, list);
     }
 
-    return (creators ?? []).map((c) => ({
+    return (creators ?? []).map((c: { id: string; name: string; craft: string; area: string; rate: number; image_key: string }) => ({
       id: c.id,
       name: c.name,
       craft: c.craft,
@@ -54,31 +55,33 @@ const BookingInput = z.object({
   creator_ids: z.array(z.string().min(1).max(64)).min(1).max(10),
 });
 
+export type BookingResult =
+  | { ok: true; request_id: string; pinged: string[]; conflicts: string[] }
+  | { ok: false; reason: "all_conflict"; pinged: string[]; conflicts: string[]; request_id: null };
+
 export const submitBookingRequest = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => BookingInput.parse(data))
-  .handler(async ({ data }) => {
-    // Determine which creators are actually free that day
-    const { data: busyRows, error: busyErr } = await supabase
+  .handler(async ({ data }): Promise<BookingResult> => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: busyRows, error: busyErr } = await supabaseAdmin
       .from("creator_busy_dates")
       .select("creator_id")
       .in("creator_id", data.creator_ids)
       .eq("busy_date", data.event_date);
     if (busyErr) throw new Error(busyErr.message);
 
-    const conflictSet = new Set((busyRows ?? []).map((r) => r.creator_id as string));
-    const pinged = data.creator_ids.filter((id) => !conflictSet.has(id));
+    const conflicts: string[] = Array.from(
+      new Set((busyRows ?? []).map((r: { creator_id: string }) => r.creator_id)),
+    );
+    const conflictSet = new Set(conflicts);
+    const pinged: string[] = data.creator_ids.filter((id) => !conflictSet.has(id));
 
     if (pinged.length === 0) {
-      return {
-        ok: false as const,
-        reason: "all_conflict" as const,
-        conflicts: Array.from(conflictSet),
-        pinged: [],
-        request_id: null,
-      };
+      return { ok: false, reason: "all_conflict", pinged: [], conflicts, request_id: null };
     }
 
-    const { data: inserted, error: insErr } = await supabase
+    const { data: inserted, error: insErr } = await supabaseAdmin
       .from("booking_requests")
       .insert({
         event_date: data.event_date,
@@ -92,20 +95,11 @@ export const submitBookingRequest = createServerFn({ method: "POST" })
     if (insErr) throw new Error(insErr.message);
 
     const rows = [
-      ...pinged.map((id) => ({ request_id: inserted.id, creator_id: id, status: "pending" as const })),
-      ...Array.from(conflictSet).map((id) => ({
-        request_id: inserted.id,
-        creator_id: id,
-        status: "conflict" as const,
-      })),
+      ...pinged.map((id) => ({ request_id: inserted.id as string, creator_id: id, status: "pending" as const })),
+      ...conflicts.map((id) => ({ request_id: inserted.id as string, creator_id: id, status: "conflict" as const })),
     ];
-    const { error: linkErr } = await supabase.from("booking_request_creators").insert(rows);
+    const { error: linkErr } = await supabaseAdmin.from("booking_request_creators").insert(rows);
     if (linkErr) throw new Error(linkErr.message);
 
-    return {
-      ok: true as const,
-      request_id: inserted.id as string,
-      pinged,
-      conflicts: Array.from(conflictSet),
-    };
+    return { ok: true, request_id: inserted.id as string, pinged, conflicts };
   });
