@@ -578,7 +578,7 @@ function BookingWidget() {
               </div>
 
               <div>
-                <label className="tag text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" /> Venue (optional)</label>
+                <label className="tag text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" /> Venue</label>
                 <input
                   value={venue}
                   onChange={(e) => setVenue(e.target.value)}
