@@ -347,7 +347,7 @@ function BookingWidget() {
   const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string } | null>(null);
 
   // Default-select first 2 creators once data arrives
-  useMemo(() => {
+  useEffect(() => {
     if (selectedCreators.length === 0 && creators.length > 0) {
       setSelectedCreators(creators.slice(0, 2).map((c: CreatorWithBusy) => c.id));
     }
