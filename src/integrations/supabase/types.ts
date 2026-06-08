@@ -18,16 +18,22 @@ export type Database = {
         Row: {
           creator_id: string
           request_id: string
+          responded_at: string | null
+          response_token: string
           status: string
         }
         Insert: {
           creator_id: string
           request_id: string
+          responded_at?: string | null
+          response_token?: string
           status?: string
         }
         Update: {
           creator_id?: string
           request_id?: string
+          responded_at?: string | null
+          response_token?: string
           status?: string
         }
         Relationships: [
@@ -49,33 +55,85 @@ export type Database = {
       }
       booking_requests: {
         Row: {
+          chosen_creator_id: string | null
+          confirmation_token: string
           created_at: string
           email: string
           event_date: string
           event_type: string
           hours: number
           id: string
+          status: string
           venue: string
         }
         Insert: {
+          chosen_creator_id?: string | null
+          confirmation_token?: string
           created_at?: string
           email: string
           event_date: string
           event_type: string
           hours: number
           id?: string
+          status?: string
           venue: string
         }
         Update: {
+          chosen_creator_id?: string | null
+          confirmation_token?: string
           created_at?: string
           email?: string
           event_date?: string
           event_type?: string
           hours?: number
           id?: string
+          status?: string
           venue?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "booking_requests_chosen_creator_id_fkey"
+            columns: ["chosen_creator_id"]
+            isOneToOne: false
+            referencedRelation: "creators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_status_events: {
+        Row: {
+          actor: string | null
+          created_at: string
+          event: string
+          id: string
+          meta: Json
+          request_id: string
+        }
+        Insert: {
+          actor?: string | null
+          created_at?: string
+          event: string
+          id?: string
+          meta?: Json
+          request_id: string
+        }
+        Update: {
+          actor?: string | null
+          created_at?: string
+          event?: string
+          id?: string
+          meta?: Json
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_status_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "booking_requests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       creator_busy_dates: {
         Row: {

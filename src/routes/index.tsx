@@ -344,7 +344,7 @@ function BookingWidget() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string } | null>(null);
+  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string; confirmation_token: string } | null>(null);
 
   // Default-select first 2 creators once data arrives
   useEffect(() => {
@@ -389,7 +389,7 @@ function BookingWidget() {
       if (!res.ok) {
         setSubmitError("All selected creators are booked on that date. Try another date.");
       } else {
-        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id });
+        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id, confirmation_token: res.confirmation_token });
       }
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
@@ -527,12 +527,20 @@ function BookingWidget() {
                   );
                 })}
               </div>
-              <button
-                onClick={reset}
-                className="mt-auto self-start tag inline-flex items-center gap-2 hover:text-accent transition-colors pt-8"
-              >
-                Send another request <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="mt-auto flex flex-wrap gap-3 items-center pt-8">
+                <a
+                  href={`/booking/${result.confirmation_token}`}
+                  className="bg-foreground text-background px-4 py-2 text-xs rounded-full hover:bg-accent hover:text-accent-foreground transition-colors inline-flex items-center gap-2"
+                >
+                  Track status <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  onClick={reset}
+                  className="tag inline-flex items-center gap-2 hover:text-accent transition-colors"
+                >
+                  Send another
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
