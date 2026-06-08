@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RespondTokenRouteImport } from './routes/respond.$token'
 import { Route as BookingTokenRouteImport } from './routes/booking.$token'
 
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const BookingTokenRoute = BookingTokenRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/booking/$token': typeof BookingTokenRoute
   '/respond/$token': typeof RespondTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/booking/$token': typeof BookingTokenRoute
   '/respond/$token': typeof RespondTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/booking/$token': typeof BookingTokenRoute
   '/respond/$token': typeof RespondTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/booking/$token' | '/respond/$token'
+  fullPaths: '/' | '/admin' | '/booking/$token' | '/respond/$token'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/booking/$token' | '/respond/$token'
-  id: '__root__' | '/' | '/booking/$token' | '/respond/$token'
+  to: '/' | '/admin' | '/booking/$token' | '/respond/$token'
+  id: '__root__' | '/' | '/admin' | '/booking/$token' | '/respond/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   BookingTokenRoute: typeof BookingTokenRoute
   RespondTokenRoute: typeof RespondTokenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   BookingTokenRoute: BookingTokenRoute,
   RespondTokenRoute: RespondTokenRoute,
 }
