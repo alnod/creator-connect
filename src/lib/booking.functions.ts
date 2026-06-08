@@ -196,10 +196,10 @@ export const getRequestByToken = createServerFn({ method: "GET" })
       chosen_creator_id: (req.chosen_creator_id as string | null) ?? null,
       created_at: req.created_at as string,
       creators: creatorRows,
-      events: (events ?? []).map((e: { event: string; created_at: string; meta: Record<string, unknown> }) => ({
+      events: (events ?? []).map((e: { event: string; created_at: string; meta: unknown }) => ({
         event: e.event,
         created_at: e.created_at,
-        meta: e.meta ?? {},
+        meta_json: JSON.stringify(e.meta ?? {}),
       })),
     };
   });
