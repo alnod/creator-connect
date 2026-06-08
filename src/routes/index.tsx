@@ -389,7 +389,7 @@ function BookingWidget() {
       if (!res.ok) {
         setSubmitError("All selected creators are booked on that date. Try another date.");
       } else {
-        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id });
+        setResult({ pinged: res.pinged, conflicts: res.conflicts, request_id: res.request_id, confirmation_token: res.confirmation_token });
       }
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
