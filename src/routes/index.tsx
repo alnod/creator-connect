@@ -344,7 +344,7 @@ function BookingWidget() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string } | null>(null);
+  const [result, setResult] = useState<{ pinged: string[]; conflicts: string[]; request_id: string; confirmation_token: string } | null>(null);
 
   // Default-select first 2 creators once data arrives
   useEffect(() => {
