@@ -527,12 +527,20 @@ function BookingWidget() {
                   );
                 })}
               </div>
-              <button
-                onClick={reset}
-                className="mt-auto self-start tag inline-flex items-center gap-2 hover:text-accent transition-colors pt-8"
-              >
-                Send another request <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="mt-auto flex flex-wrap gap-3 items-center pt-8">
+                <a
+                  href={`/booking/${result.confirmation_token}`}
+                  className="bg-foreground text-background px-4 py-2 text-xs rounded-full hover:bg-accent hover:text-accent-foreground transition-colors inline-flex items-center gap-2"
+                >
+                  Track status <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  onClick={reset}
+                  className="tag inline-flex items-center gap-2 hover:text-accent transition-colors"
+                >
+                  Send another
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
