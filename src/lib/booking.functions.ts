@@ -143,7 +143,7 @@ export type RequestDetail = {
   chosen_creator_id: string | null;
   created_at: string;
   creators: CreatorResponseRow[];
-  events: { event: string; created_at: string; meta: unknown }[];
+  events: { event: string; created_at: string; meta_json: string }[];
 };
 
 export const getRequestByToken = createServerFn({ method: "GET" })
